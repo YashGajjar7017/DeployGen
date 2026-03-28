@@ -1,0 +1,20 @@
+# Frontend .gitignore
+node_modules/
+.next/
+.env.local
+.env.* 
+dist/
+build/
+.DS_Store
+.git/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.idea/
+.vscode/
+*.swp
+.coverage/
+.turbo/
+out/
+public/offline.html

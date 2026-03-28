@@ -1,0 +1,20 @@
+# Windows Client .gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.env
+*.log
+.DS_Store
+.idea/
+.vscode/
+venv/
+env/
+*.exe
+*.dll
+*.pyd
+.pytest_cache/
+*.spec
+test_*.py

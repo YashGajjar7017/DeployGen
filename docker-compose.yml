@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:latest
+    container_name: appmanager-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - appmanager-network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: appmanager-backend
+    ports:
+      - "5000:5000"
+    environment:
+      MONGODB_URI: mongodb://root:rootpassword@mongodb:27017/app-manager?authSource=admin
+      JWT_SECRET: your-secret-key-change-this
+      NODE_ENV: development
+      API_URL: http://localhost:5000
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mongodb
+    networks:
+      - appmanager-network
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  # Frontend (Development)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: appmanager-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5000/api
+    depends_on:
+      - backend
+    networks:
+      - appmanager-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  # MongoDB UI (Optional)
+  mongo-express:
+    image: mongo-express:latest
+    container_name: appmanager-mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: rootpassword
+      ME_CONFIG_MONGODB_URL: mongodb://root:rootpassword@mongodb:27017/
+    depends_on:
+      - mongodb
+    networks:
+      - appmanager-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  appmanager-network:
+    driver: bridge
