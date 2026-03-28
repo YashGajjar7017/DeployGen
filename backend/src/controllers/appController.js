@@ -3,7 +3,24 @@
  * Handles app listing, filtering, and information
  */
 
-import { getAllApps, getPremiumApps, getAppsByCategory, getCategories } from '../config/apps.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const appsPath = path.join(__dirname, '../../apps.json');
+let APPS_DATABASE;
+
+const loadApps = () => {
+  try {
+    const data = fs.readFileSync(appsPath, 'utf8');
+    APPS_DATABASE = JSON.parse(data);
+  } catch (error) {
+    console.error('Failed to load apps.json:', error);
+    APPS_DATABASE = [];
+  }
+};
+
+loadApps();
 
 /**
  * Get all available apps
@@ -12,7 +29,7 @@ import { getAllApps, getPremiumApps, getAppsByCategory, getCategories } from '..
 export const getAllAppsHandler = async (req, res) => {
   try {
     const userIsPremium = req.user ? req.user.isPremiumValid() : false;
-    const apps = userIsPremium ? getAllApps(true) : getAllApps(false);
+const apps = userIsPremium ? APPS_DATABASE : APPS_DATABASE.filter(app => !app.premium);
 
     res.status(200).json({
       success: true,
@@ -35,7 +52,7 @@ export const getAllAppsHandler = async (req, res) => {
 export const getAppsByCategories = async (req, res) => {
   try {
     const { category } = req.params;
-    const apps = getAppsByCategory(category);
+const apps = APPS_DATABASE.filter(app => app.category === category);
 
     if (apps.length === 0) {
       return res.status(404).json({
@@ -65,7 +82,7 @@ export const getAppsByCategories = async (req, res) => {
  */
 export const getCategoriesHandler = async (req, res) => {
   try {
-    const categories = getCategories();
+const categories = [...new Set(APPS_DATABASE.map(app => app.category))];
 
     res.status(200).json({
       success: true,
@@ -97,7 +114,7 @@ export const searchApps = async (req, res) => {
     }
 
     const userIsPremium = req.user ? req.user.isPremiumValid() : false;
-    const allApps = userIsPremium ? getAllApps(true) : getAllApps(false);
+const allApps = userIsPremium ? APPS_DATABASE : APPS_DATABASE.filter(app => !app.premium);
 
     const searchTerm = q.toLowerCase();
     const results = allApps.filter(app =>
@@ -134,7 +151,7 @@ export const getPremiumAppsHandler = async (req, res) => {
       });
     }
 
-    const premiumApps = getPremiumApps();
+const premiumApps = APPS_DATABASE.filter(app => app.premium);
 
     res.status(200).json({
       success: true,

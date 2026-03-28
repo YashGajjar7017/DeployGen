@@ -31,7 +31,7 @@ export const verifyTokenHash = (token, hash) => {
  * Generate download link from token
  */
 export const generateDownloadLink = (token) => {
-  return `${process.env.API_URL || 'http://localhost:5000'}/api/config/${token}`;
+  return `${process.env.API_URL || 'http://localhost:8000'}/api/config/${token}`;
 };
 
 /**
