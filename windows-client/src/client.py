@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 class AppmanagerClient:
     """Main client for AppManager"""
     
-    def __init__(self, backend_url: str = "http://localhost:5000/api"):
+    def __init__(self, backend_url: str = "http://localhost:8000/api"):
         self.backend_url = backend_url
         self.session = requests.Session()
         self.download_dir = Path.home() / "AppManager_Downloads"

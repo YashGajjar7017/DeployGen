@@ -1,8 +1,3 @@
-/**
- * Main Server File
- * Initializes Express app, middleware, and routes
- */
-
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';

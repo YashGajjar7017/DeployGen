@@ -22,12 +22,12 @@ services:
       dockerfile: Dockerfile
     container_name: appmanager-backend
     ports:
-      - "5000:5000"
+"8000:8000"
     environment:
       MONGODB_URI: mongodb://root:rootpassword@mongodb:27017/app-manager?authSource=admin
       JWT_SECRET: your-secret-key-change-this
       NODE_ENV: development
-      API_URL: http://localhost:5000
+      API_URL: http://localhost:8000
       FRONTEND_URL: http://localhost:3000
     depends_on:
       - mongodb
@@ -46,7 +46,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:5000/api
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api
     depends_on:
       - backend
     networks:

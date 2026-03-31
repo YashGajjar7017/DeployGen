@@ -1,8 +1,3 @@
-/**
- * App Card Component
- * Individual app selection card
- */
-
 'use client';
 
 import { Check } from 'lucide-react';

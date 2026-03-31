@@ -35,7 +35,7 @@ class AppManagerGUI:
             pass
         
         # Backend URL
-        self.backend_url = "http://localhost:5000/api"
+        self.backend_url = "http://localhost:8000/api"
         self.download_dir = Path.home() / "AppManager_Downloads"
         self.download_dir.mkdir(exist_ok=True)
         

@@ -1,13 +1,5 @@
-/**
- * JWT Utilities
- * Handles JWT token generation and verification
- */
-
 import jwt from 'jsonwebtoken';
 
-/**
- * Generate JWT token for user authentication
- */
 export const generateJWT = (userId) => {
   return jwt.sign(
     { userId },
@@ -16,9 +8,6 @@ export const generateJWT = (userId) => {
   );
 };
 
-/**
- * Verify JWT token
- */
 export const verifyJWT = (token) => {
   try {
     return jwt.verify(token, process.env.JWT_SECRET || 'default-secret-key');
@@ -27,9 +16,6 @@ export const verifyJWT = (token) => {
   }
 };
 
-/**
- * Decode JWT token without verification
- */
 export const decodeJWT = (token) => {
   return jwt.decode(token);
 };

@@ -1,8 +1,3 @@
-/**
- * Dashboard Page
- * Main app selection interface
- */
-
 'use client';
 
 import { useEffect, useState } from 'react';
