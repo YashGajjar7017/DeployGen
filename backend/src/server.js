@@ -67,13 +67,15 @@ app.use(errorHandler);
 const startServer = async () => {
   try {
     // Connect to database
-    await connectDB();
+    await connectDB().catch(err => {
+      console.warn('MongoDB connection failed, server will start but requests may fail');
+    });
 
     // Start listening
     app.listen(PORT, () => {
       console.log(`\n✓ Server running on http://localhost:${PORT}`);
       console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`✓ Database: MongoDB Connected`);
+      console.log(`✓ Database: MongoDB Connection Attempted`);
       console.log(`✓ API Documentation: http://localhost:${PORT}/api\n`);
     });
   } catch (error) {
@@ -89,5 +91,3 @@ process.on('SIGINT', () => {
   console.log('\n✗ Server shutting down...');
   process.exit(0);
 });
-
-export default app;

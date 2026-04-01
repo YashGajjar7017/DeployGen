@@ -7,12 +7,23 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
   try {
-const conn = await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/");
+    // Use MongoDB URI from env, or fallback to local MongoDB instance
+    const mongoUri = process.env.MONGODB_URI || "mongodb://localhost:27017/app-manager";
+    
+    const conn = await mongoose.connect(mongoUri, {
+      retryWrites: true,
+      w: 'majority',
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    });
+    
     console.log(`✓ MongoDB Connected: ${conn.connection.host}`);
     return conn;
   } catch (error) {
     console.error(`✗ MongoDB Connection Error: ${error.message}`);
-    // process.exit(1);
+    console.error('Attempted URI:', process.env.MONGODB_URI || "mongodb://localhost:27017/app-manager");
+    // Don't exit - allow server to start but requests will fail gracefully
+    throw error;
   }
 };
 

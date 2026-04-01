@@ -64,11 +64,17 @@ export const generateConfig = async (req, res) => {
       isOneTimeUse: true,
       configName,
       description
+    }).catch(err => {
+      console.error('Configuration create error:', err);
+      throw err;
     });
 
     // Update user stats
     if (req.user) {
-      await req.user.updateOne({ $inc: { totalTokensGenerated: 1 } });
+      await req.user.updateOne({ $inc: { totalTokensGenerated: 1 } }).catch(err => {
+        console.error('User update error:', err);
+        // Don't fail the request if user update fails
+      });
     }
 
     // Log analytics
@@ -79,6 +85,9 @@ export const generateConfig = async (req, res) => {
       userIp: req.ip,
       userAgent: req.get('user-agent'),
       metadata: { appCount: selectedAppIds.length }
+    }).catch(err => {
+      console.error('Analytics create error:', err);
+      // Don't fail the request if analytics fails
     });
 
     res.status(201).json({
@@ -98,7 +107,8 @@ export const generateConfig = async (req, res) => {
     console.error('Generate config error:', error);
     res.status(500).json({
       success: false,
-      message: error.message || 'Failed to generate configuration'
+      message: error.message || 'Failed to generate configuration',
+      ...(process.env.NODE_ENV === 'development' && { error: error.toString() })
     });
   }
 };
