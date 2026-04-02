@@ -12,7 +12,7 @@ A production-ready web application that allows users to select multiple software
 - ✅ **Configuration History**: Save and reuse setup configurations
 - ✅ **Admin Analytics**: Track downloads, active users, and popular apps
 - ✅ **Dark Mode**: Modern UI with light/dark theme support
-- ✅ **Cross-Platform**: Backend (Node.js), Frontend (Next.js), Client (Python)
+- ✅ **Cross-Platform**: Backend (Node.js), Frontend (Next.js), Client (Electron & Python)
 
 ---
 
@@ -39,13 +39,21 @@ A production-ready web application that allows users to select multiple software
 │          └────────────────────┘                        │
 │                    ▲                                    │
 │                    │                                    │
-│       ┌────────────┴──────────────┐                    │
-│       │                           │                    │
-│  ┌────▼──────────┐        ┌──────▼─────────┐          │
-│  │  Windows      │        │    Admin       │          │
-│  │  Client       │        │    Dashboard   │          │
-│  │  (Python)     │        │    (Web)       │          │
-│  └───────────────┘        └────────────────┘          │
+│       ┌────────────┴──────────────────────┐            │
+│       │                                   │            │
+│  ┌────▼──────────┐        ┌──────▼──────────────┐    │
+│  │  Desktop      │        │    Admin           │    │
+│  │  Client       │        │    Dashboard       │    │
+│  │  (Electron)   │        │    (Web)           │    │
+│  └───────────────┘        └────────────────────┘    │
+│  (New Modern UI)                                      │
+│       │                                               │
+│  ┌────▼──────────┐                                   │
+│  │  Legacy       │                                   │
+│  │  Client       │                                   │
+│  │  (Python)     │                                   │
+│  └───────────────┘                                   │
+│  (Deprecated)                                         │
 │                                                        │
 └────────────────────────────────────────────────────────┘
 ```
@@ -64,7 +72,8 @@ App_manager/
 │   │   ├── controllers/          # Route controllers
 │   │   │   ├── authController.js
 │   │   │   ├── appController.js
-│   │   │   └── configController.js
+│   │   │   ├── configController.js
+│   │   │   └── premiumController.js
 │   │   ├── middleware/           # Custom middleware
 │   │   │   ├── auth.js
 │   │   │   └── errorHandler.js
@@ -73,16 +82,23 @@ App_manager/
 │   │   │   ├── Configuration.js
 │   │   │   └── Analytics.js
 │   │   ├── routes/               # API routes
-│   │   ├── utils/                # Utility functions
+│   │   │   ├── appRoutes.js
+│   │   │   ├── authRoutes.js
+│   │   │   ├── premiumRoutes.js (NEW)
+│   │   │   └── ...
 │   │   └── server.js             # Main server
 │   ├── package.json
 │   └── .env.example
 │
-├── frontend/                     # Next.js/React
+├── frontend/                     # Next.js/React Web App
 │   ├── app/
 │   │   ├── components/           # React components
+│   │   ├── apps/                 # Apps listing
 │   │   ├── dashboard/            # App selection
 │   │   ├── login/                # Auth pages
+│   │   ├── about/                # About page (NEW)
+│   │   ├── contact/              # Contact page (NEW)
+│   │   ├── premium/              # Premium page (NEW)
 │   │   ├── hooks/                # Custom hooks
 │   │   ├── lib/                  # Utilities
 │   │   ├── layout.jsx            # Root layout
@@ -92,7 +108,23 @@ App_manager/
 │   ├── next.config.js
 │   └── .env.example
 │
-├── windows-client/               # Python GUI Client
+├── desktop-client/               # Electron Desktop Client (NEW)
+│   ├── main.js                   # Electron main process
+│   ├── preload.js                # IPC bridge
+│   ├── src/
+│   │   ├── App.jsx               # Main component
+│   │   ├── index.jsx             # React entry
+│   │   ├── components/
+│   │   │   ├── Installer.jsx     # Installation UI
+│   │   │   ├── ConfigurationFetcher.jsx
+│   │   │   └── SystemInfo.jsx
+│   │   └── styles/
+│   ├── public/
+│   │   └── index.html
+│   ├── package.json
+│   └── README.md
+│
+├── windows-client/               # Legacy Python Client
 │   ├── src/
 │   │   ├── client.py             # CLI version
 │   │   └── gui_client.py         # GUI version (Tkinter)

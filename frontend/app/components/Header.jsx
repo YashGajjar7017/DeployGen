@@ -34,11 +34,20 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/dashboard" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400">
+          <Link href="/dashboard" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">
             Dashboard
           </Link>
-          <Link href="/apps" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400">
+          <Link href="/apps" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">
             Apps
+          </Link>
+          <Link href="/premium" className="text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 font-medium transition-colors">
+            Premium
+          </Link>
+          <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 font-medium transition-colors">
+            About
+          </Link>
+          <Link href="/contact" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">
+            Contact
           </Link>
 
           {/* Theme Toggle */}
@@ -95,11 +104,20 @@ export default function Header() {
       {isOpen && (
         <div className="md:hidden bg-slate-50 dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700">
           <div className="px-4 py-4 space-y-3">
-            <Link href="/dashboard" className="block px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600">
+            <Link href="/dashboard" className="block px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors">
               Dashboard
             </Link>
-            <Link href="/apps" className="block px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600">
+            <Link href="/apps" className="block px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors">
               Apps
+            </Link>
+            <Link href="/premium" className="block px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-cyan-600 rounded-lg hover:bg-cyan-50 dark:hover:bg-slate-700 transition-colors">
+              Premium
+            </Link>
+            <Link href="/about" className="block px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-purple-600 rounded-lg hover:bg-purple-50 dark:hover:bg-slate-700 transition-colors">
+              About
+            </Link>
+            <Link href="/contact" className="block px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors">
+              Contact
             </Link>
             <hr className="dark:border-slate-700" />
             {mounted && (

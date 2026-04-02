@@ -42,7 +42,6 @@ export const generateConfig = async (req, res) => {
         appName: app.name,
         version: app.version
       });
-      // Rough calculation
       totalSize += parseInt(app.fileSize) || 50;
     }
 
@@ -52,33 +51,49 @@ export const generateConfig = async (req, res) => {
     const downloadLink = generateDownloadLink(token);
     const expiresAt = getTokenExpiry();
 
-    // Create configuration
-    const config = await Configuration.create({
-      userId: req.user ? req.user._id : null,
-      token: token.substring(0, 20), // Store partial token for display
-      tokenHash,
-      downloadLink,
-      selectedApps,
-      totalFileSize: `~${totalSize}MB`,
-      expiresAt,
-      isOneTimeUse: true,
-      configName,
-      description
-    }).catch(err => {
-      console.error('Configuration create error:', err);
-      throw err;
-    });
+    // Create configuration with timeout handling
+    let config;
+    try {
+      config = await Promise.race([
+        Configuration.create({
+          userId: req.user ? req.user._id : null,
+          token: token.substring(0, 20),
+          tokenHash,
+          downloadLink,
+          selectedApps,
+          totalFileSize: `~${totalSize}MB`,
+          expiresAt,
+          isOneTimeUse: true,
+          configName,
+          description
+        }),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Database operation timeout - MongoDB may be unavailable')), 15000)
+        )
+      ]);
+    } catch (dbError) {
+      console.error('Configuration create error:', dbError.message);
+      
+      if (dbError.message.includes('timeout')) {
+        return res.status(503).json({
+          success: false,
+          message: 'Database temporarily unavailable. Please try again in a few moments.',
+          code: 'DB_TIMEOUT'
+        });
+      }
+      
+      throw dbError;
+    }
 
-    // Update user stats
+    // Update user stats (non-critical)
     if (req.user) {
-      await req.user.updateOne({ $inc: { totalTokensGenerated: 1 } }).catch(err => {
-        console.error('User update error:', err);
-        // Don't fail the request if user update fails
+      req.user.updateOne({ $inc: { totalTokensGenerated: 1 } }).catch(err => {
+        console.error('User update error:', err.message);
       });
     }
 
-    // Log analytics
-    await Analytics.create({
+    // Log analytics (non-critical)
+    Analytics.create({
       type: 'token_generated',
       userId: req.user ? req.user._id : null,
       configurationId: config._id,
@@ -86,8 +101,7 @@ export const generateConfig = async (req, res) => {
       userAgent: req.get('user-agent'),
       metadata: { appCount: selectedAppIds.length }
     }).catch(err => {
-      console.error('Analytics create error:', err);
-      // Don't fail the request if analytics fails
+      console.error('Analytics create error:', err.message);
     });
 
     res.status(201).json({
@@ -104,11 +118,15 @@ export const generateConfig = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Generate config error:', error);
+    console.error('Generate config error:', error.message);
+    
     res.status(500).json({
       success: false,
-      message: error.message || 'Failed to generate configuration',
-      ...(process.env.NODE_ENV === 'development' && { error: error.toString() })
+      message: 'Failed to generate configuration. Please check your MongoDB connection and try again.',
+      ...(process.env.NODE_ENV === 'development' && { 
+        error: error.message,
+        tip: 'Ensure MongoDB is running and accessible. Check .env MONGODB_URI setting.'
+      })
     });
   }
 };

@@ -12,6 +12,7 @@ import authRoutes from './routes/authRoutes.js';
 import appRoutes from './routes/appRoutes.js';
 import configRoutes from './routes/configRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import premiumRoutes from './routes/premiumRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -50,6 +51,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/apps', appRoutes);
 app.use('/api/config', configRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/premium', premiumRoutes);
 
 // 404 handler
 app.use((req, res) => {
