@@ -29,7 +29,7 @@ export default function Header() {
           <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold">
             ⚙️
           </div>
-          AppManager
+          DeployGen
         </Link>
 
         {/* Desktop Menu */}

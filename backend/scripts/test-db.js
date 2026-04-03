@@ -1,12 +1,3 @@
-#!/usr/bin/env node
-
-/**
- * MongoDB Connection Diagnostic Tool
- * Tests connectivity to MongoDB and provides troubleshooting steps
- * 
- * Usage: node scripts/test-db.js
- */
-
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import dns from 'dns';

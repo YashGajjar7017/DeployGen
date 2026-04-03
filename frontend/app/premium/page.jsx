@@ -85,7 +85,7 @@ export default function PremiumPage() {
 
   return (
     <div className="bg-white dark:bg-slate-900 min-h-screen">
-      <Header />
+      {/* <Header /> */}
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-slate-800 dark:to-slate-900 py-16 md:py-24 relative overflow-hidden">
