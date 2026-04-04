@@ -52,6 +52,56 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  // Email verification fields
+  emailVerified: {
+    type: Boolean,
+    default: false
+  },
+  emailVerificationToken: {
+    type: String,
+    select: false
+  },
+  emailVerificationExpiry: {
+    type: Date,
+    select: false
+  },
+  // User profile fields
+  phone: {
+    type: String,
+    default: null
+  },
+  avatarUrl: {
+    type: String,
+    default: null
+  },
+  bio: {
+    type: String,
+    default: null,
+    maxlength: [500, 'Bio cannot be more than 500 characters']
+  },
+  country: {
+    type: String,
+    default: null
+  },
+  // Activity tracking
+  lastLogin: {
+    type: Date,
+    default: null
+  },
+  loginCount: {
+    type: Number,
+    default: 0
+  },
+  // Preferences
+  notificationsEnabled: {
+    type: Boolean,
+    default: true
+  },
+  twoFactorEnabled: {
+    type: Boolean,
+    default: false
+  },
+  // Admin flag
   isAdmin: {
     type: Boolean,
     default: false,
@@ -88,6 +138,42 @@ userSchema.methods.matchPassword = async function(enteredPassword) {
 // Method to check if premium is still valid
 userSchema.methods.isPremiumValid = function() {
   return this.isPremium && this.premiumExpiry && this.premiumExpiry > new Date();
+};
+
+// Method to generate email verification token
+userSchema.methods.generateEmailVerificationToken = async function() {
+  const crypto = await import('crypto');
+  const verificationToken = crypto.randomBytes(32).toString('hex');
+  this.emailVerificationToken = crypto
+    .createHash('sha256')
+    .update(verificationToken)
+    .digest('hex');
+  this.emailVerificationExpiry = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+  await this.save();
+  return verificationToken;
+};
+
+// Method to verify email token
+userSchema.methods.verifyEmailToken = async function(token) {
+  const crypto = await import('crypto');
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(token)
+    .digest('hex');
+  
+  if (this.emailVerificationToken !== hashedToken) {
+    return false;
+  }
+  
+  if (this.emailVerificationExpiry < Date.now()) {
+    return false;
+  }
+  
+  this.emailVerified = true;
+  this.emailVerificationToken = undefined;
+  this.emailVerificationExpiry = undefined;
+  await this.save();
+  return true;
 };
 
 const User = mongoose.model('User', userSchema);

@@ -249,3 +249,173 @@ export const changePassword = async (req, res, next) => {
     });
   }
 };
+
+/**
+ * Request Email Verification
+ * POST /api/auth/request-email-verification
+ */
+export const requestEmailVerification = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (user.emailVerified) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is already verified'
+      });
+    }
+
+    const verificationToken = await user.generateEmailVerificationToken();
+
+    res.status(200).json({
+      success: true,
+      message: 'Email verification token generated',
+      token: verificationToken,
+      note: 'In production, this token should be sent via email'
+    });
+  } catch (error) {
+    console.error('Request email verification error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to request email verification'
+    });
+  }
+};
+
+/**
+ * Verify Email
+ * POST /api/auth/verify-email
+ */
+export const verifyEmail = async (req, res, next) => {
+  try {
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        message: 'Verification token is required'
+      });
+    }
+
+    const user = await User.findById(req.user._id);
+    const isValid = await user.verifyEmailToken(token);
+
+    if (!isValid) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or expired verification token'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Email verified successfully',
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        emailVerified: user.emailVerified
+      }
+    });
+  } catch (error) {
+    console.error('Verify email error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to verify email'
+    });
+  }
+};
+
+/**
+ * Update User Settings
+ * PUT /api/auth/settings
+ */
+export const updateSettings = async (req, res, next) => {
+  try {
+    const { phone, bio, country, notificationsEnabled, avatarUrl } = req.body;
+
+    const updateData = {};
+    if (phone !== undefined) updateData.phone = phone;
+    if (bio !== undefined) updateData.bio = bio;
+    if (country !== undefined) updateData.country = country;
+    if (notificationsEnabled !== undefined) updateData.notificationsEnabled = notificationsEnabled;
+    if (avatarUrl !== undefined) updateData.avatarUrl = avatarUrl;
+
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      updateData,
+      { new: true, runValidators: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'Settings updated successfully',
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        emailVerified: user.emailVerified,
+        phone: user.phone,
+        avatarUrl: user.avatarUrl,
+        bio: user.bio,
+        country: user.country,
+        notificationsEnabled: user.notificationsEnabled,
+        twoFactorEnabled: user.twoFactorEnabled
+      }
+    });
+  } catch (error) {
+    console.error('Update settings error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to update settings'
+    });
+  }
+};
+
+/**
+ * Get Full User Settings
+ * GET /api/auth/settings
+ */
+export const getSettings = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    res.status(200).json({
+      success: true,
+      settings: {
+        // Profile Info
+        username: user.username,
+        email: user.email,
+        emailVerified: user.emailVerified,
+        phone: user.phone,
+        avatarUrl: user.avatarUrl,
+        bio: user.bio,
+        country: user.country,
+        
+        // Account Info
+        subscription: user.subscription,
+        isPremium: user.isPremium,
+        premiumExpiry: user.premiumExpiry,
+        
+        // Activity
+        lastLogin: user.lastLogin,
+        loginCount: user.loginCount,
+        createdAt: user.createdAt,
+        
+        // Preferences
+        notificationsEnabled: user.notificationsEnabled,
+        twoFactorEnabled: user.twoFactorEnabled,
+        
+        // Stats
+        totalDownloads: user.totalDownloads,
+        totalTokensGenerated: user.totalTokensGenerated
+      }
+    });
+  } catch (error) {
+    console.error('Get settings error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Failed to fetch settings'
+    });
+  }
+};

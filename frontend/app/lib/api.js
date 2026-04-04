@@ -27,6 +27,14 @@ export const authAPI = {
   getProfile: () => apiClient.get('/auth/profile'),
   updateProfile: (data) => apiClient.put('/auth/profile', data),
   changePassword: (data) => apiClient.post('/auth/change-password', data),
+  
+  // Email verification
+  requestEmailVerification: () => apiClient.post('/auth/request-email-verification'),
+  verifyEmail: (token) => apiClient.post('/auth/verify-email', { token }),
+  
+  // Settings
+  getSettings: () => apiClient.get('/auth/settings'),
+  updateSettings: (data) => apiClient.put('/auth/settings', data),
 };
 
 // ==================== APPS ENDPOINTS ====================
@@ -37,6 +45,9 @@ export const appsAPI = {
   getByCategory: (category) => apiClient.get(`/apps/category/${category}`),
   search: (query) => apiClient.get(`/apps/search?q=${query}`),
   getPremium: () => apiClient.get('/apps/premium'),
+  getFeatured: () => apiClient.get('/apps/featured'),
+  getApp: (slug) => apiClient.get(`/apps/${slug}`),
+  getVersions: (slug) => apiClient.get(`/apps/${slug}/versions`),
 };
 
 // ==================== CONFIG ENDPOINTS ====================

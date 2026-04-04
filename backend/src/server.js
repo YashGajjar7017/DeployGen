@@ -3,7 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
-import connectDB from './config/database.js';
+import connectDB, { getDBStatus } from './config/database.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 // Routes
@@ -19,6 +19,10 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Store DB connection state in app
+app.locals.dbConnected = false;
+app.locals.getDBStatus = getDBStatus;
 
 // ==================== MIDDLEWARE ====================
 
@@ -68,20 +72,41 @@ app.use(errorHandler);
 
 const startServer = async () => {
   try {
-    // Connect to database
-    await connectDB().catch(err => {
-      console.warn('MongoDB connection failed, server will start but requests may fail');
-    });
+    // Connect to database with proper error handling
+    try {
+      await connectDB();
+      app.locals.dbConnected = true;
+      console.log('✅ Database connection successful\n');
+    } catch (dbError) {
+      app.locals.dbConnected = false;
+      console.warn('\n⚠️  Database connection failed');
+      console.warn('The server will continue but database operations will fail.');
+      console.warn('Please resolve the connection issues and restart the server.\n');
+      
+      // Option to exit if DB is critical (set DB_REQUIRED=true in .env)
+      if (process.env.DB_REQUIRED === 'true') {
+        console.error('❌ DB_REQUIRED=true - Exiting server');
+        process.exit(1);
+      }
+    }
 
     // Start listening
     app.listen(PORT, () => {
-      console.log(`\n✓ Server running on http://localhost:${PORT}`);
-      console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`✓ Database: MongoDB Connection Attempted`);
-      console.log(`✓ API Documentation: http://localhost:${PORT}/api\n`);
+      console.log(`\n🚀 Server running on http://localhost:${PORT}`);
+      console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`   Database Status: ${app.locals.dbConnected ? '✅ Connected' : '⚠️  Not Connected'}`);
+      console.log(`   API Docs: GET http://localhost:${PORT}/api/health`);
+      console.log(`\n📝 API Endpoints Available:`);
+      console.log(`   POST   /api/auth/signup`);
+      console.log(`   POST   /api/auth/login`);
+      console.log(`   GET    /api/auth/profile (protected)`);
+      console.log(`   GET    /api/auth/settings (protected)`);
+      console.log(`   GET    /api/apps`);
+      console.log(`   POST   /api/config/generate`);
+      console.log(`   GET    /api/health (database status)\n`);
     });
   } catch (error) {
-    console.error('✗ Server startup error:', error);
+    console.error('❌ Server startup error:', error);
     process.exit(1);
   }
 };
@@ -90,6 +115,12 @@ startServer();
 
 // Graceful shutdown
 process.on('SIGINT', () => {
-  console.log('\n✗ Server shutting down...');
+  console.log('\n✗ Server shutting down gracefully...');
   process.exit(0);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('❌ Uncaught Exception:', error);
+  process.exit(1);
 });

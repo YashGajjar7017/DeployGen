@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    />
+    <title>App Manager - Windows Client</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      #app {
+        width: 100%;
+        height: 100vh;
+      }
+
+      /* Loading screen */
+      .app-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto';
+      }
+
+      .loading-content {
+        text-align: center;
+        color: white;
+      }
+
+      .loading-spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .loading-subtext {
+        font-size: 14px;
+        opacity: 0.8;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="app-loading">
+        <div class="loading-content">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">App Manager</div>
+          <div class="loading-subtext">Initializing...</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Check if Electron API is available
+      if (typeof window.electronAPI === 'undefined') {
+        console.warn('Electron API not available. Running in development mode.');
+      }
+
+      // Log app startup
+      console.log('App Manager Windows Client - Initializing...');
+      console.log('Node version:', process.versions.node);
+      console.log('Chrome version:', process.versions.chrome);
+      console.log('Electron version:', process.versions.electron);
+    </script>
+
+    <!-- React and ReactDOM for development -->
+    <!-- In production, use a built bundle -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Your app component will be mounted here -->
+    <script type="module">
+      // This is where your bundled app will be loaded
+      // For development, you might use Vite or webpack
+      console.log('Loading App Manager component...');
+    </script>
+  </body>
+</html>

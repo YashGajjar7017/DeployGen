@@ -9,7 +9,11 @@ import {
   login,
   getProfile,
   updateProfile,
-  changePassword
+  changePassword,
+  requestEmailVerification,
+  verifyEmail,
+  updateSettings,
+  getSettings
 } from '../controllers/authController.js';
 import { protect } from '../middleware/auth.js';
 
@@ -23,5 +27,13 @@ router.post('/login', login);
 router.get('/profile', protect, getProfile);
 router.put('/profile', protect, updateProfile);
 router.post('/change-password', protect, changePassword);
+
+// Email verification routes
+router.post('/request-email-verification', protect, requestEmailVerification);
+router.post('/verify-email', protect, verifyEmail);
+
+// Settings routes
+router.get('/settings', protect, getSettings);
+router.put('/settings', protect, updateSettings);
 
 export default router;
