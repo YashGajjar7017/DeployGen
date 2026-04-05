@@ -58,7 +58,6 @@ async function testConnection() {
         serverSelectionTimeoutMS: 15000,
         socketTimeoutMS: 15000,
         connectTimeoutMS: 15000,
-        bufferMaxEntries: 0,
       }),
       new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Connection timeout - MongoDB unreachable')), 15000)

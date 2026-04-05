@@ -36,18 +36,10 @@ const connectDB = async (retryCount = 0) => {
       retryWrites: true,
       w: 'majority',
       
-      // Buffering settings
-      bufferMaxEntries: 0,               // Don't buffer operations if disconnected
-      bufferTimeoutMS: 10000,            // Timeout buffered operations after 10s
-      
       // Connection pool settings
       maxPoolSize: 10,
       minPoolSize: 2,
       maxIdleTimeMS: 30000,
-      
-      // Retries
-      retryAttempts: 3,
-      retryDelay: 1000,
     });
     
     dbConnectionState.connected = true;

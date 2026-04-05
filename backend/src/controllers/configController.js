@@ -4,9 +4,17 @@
  */
 
 import Configuration from '../models/Configuration.js';
+import ConfigurationJSON from '../models/ConfigurationJSON.js';
 import Analytics from '../models/Analytics.js';
 import { generateSecureToken, hashToken, generateDownloadLink, getTokenExpiry } from '../utils/token.js';
 import { getAppById, getAllApps } from '../config/apps.js';
+import mongoose from 'mongoose';
+
+// Helper to check if MongoDB is connected
+const isMongoDBConnected = () => mongoose.connection.readyState === 1;
+
+// Helper to get appropriate config model
+const getConfigModel = () => isMongoDBConnected() ? Configuration : ConfigurationJSON;
 
 /**
  * Generate configuration and token
@@ -54,34 +62,23 @@ export const generateConfig = async (req, res) => {
     // Create configuration with timeout handling
     let config;
     try {
-      config = await Promise.race([
-        Configuration.create({
-          userId: req.user ? req.user._id : null,
-          token: token.substring(0, 20),
-          tokenHash,
-          downloadLink,
-          selectedApps,
-          totalFileSize: `~${totalSize}MB`,
-          expiresAt,
-          isOneTimeUse: true,
-          configName,
-          description
-        }),
-        new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Database operation timeout - MongoDB may be unavailable')), 15000)
-        )
-      ]);
+      const ConfigModel = getConfigModel();
+      console.log(`[Config:POST] Using ${isMongoDBConnected() ? 'MongoDB' : 'JSON Fallback'} for config creation`);
+      
+      config = await ConfigModel.create({
+        userId: req.user ? req.user._id : null,
+        token: token.substring(0, 20),
+        tokenHash,
+        downloadLink,
+        selectedApps,
+        totalFileSize: `~${totalSize}MB`,
+        expiresAt,
+        isOneTimeUse: true,
+        configName,
+        description
+      });
     } catch (dbError) {
-      console.error('Configuration create error:', dbError.message);
-      
-      if (dbError.message.includes('timeout')) {
-        return res.status(503).json({
-          success: false,
-          message: 'Database temporarily unavailable. Please try again in a few moments.',
-          code: 'DB_TIMEOUT'
-        });
-      }
-      
+      console.error('[Config:POST] Configuration create error:', dbError.message);
       throw dbError;
     }
 
@@ -138,20 +135,34 @@ export const generateConfig = async (req, res) => {
 export const getConfig = async (req, res) => {
   try {
     const { token } = req.params;
+    console.log(`[Config:GET] Fetching config for token: ${token.substring(0, 10)}...`);
+    console.log(`[Config:GET] Using ${isMongoDBConnected() ? 'MongoDB' : 'JSON Fallback'} storage`);
 
-    const config = await Configuration.findOne({
+    if (!token) {
+      return res.status(400).json({
+        success: false,
+        message: 'Token is required'
+      });
+    }
+
+    const ConfigModel = getConfigModel();
+    const config = await ConfigModel.findOne({
       token: token.substring(0, 20)
     });
 
     if (!config) {
+      console.warn(`[Config:GET] Config not found for token: ${token.substring(0, 10)}...`);
       return res.status(404).json({
         success: false,
         message: 'Configuration not found'
       });
     }
 
+    console.log(`[Config:GET] Config found, checking expiry...`);
+
     // Check if token is expired
-    if (new Date() > config.expiresAt) {
+    const expiryDate = new Date(config.expiresAt);
+    if (new Date() > expiryDate) {
       return res.status(410).json({
         success: false,
         message: 'Configuration has expired'
@@ -165,6 +176,8 @@ export const getConfig = async (req, res) => {
         message: 'This configuration has already been used'
       });
     }
+
+    console.log(`[Config:GET] Fetching app details for ${config.selectedApps.length} apps...`);
 
     // Get full app details
     const appsWithDetails = config.selectedApps.map(app => {
@@ -180,17 +193,32 @@ export const getConfig = async (req, res) => {
     config.isUsed = true;
     config.usedAt = new Date();
     config.usedIp = req.ip;
-    config.downloadCount += 1;
-    await config.save();
+    config.downloadCount = (config.downloadCount || 0) + 1;
+    
+    if (isMongoDBConnected()) {
+      await config.save();
+    } else {
+      await ConfigurationJSON.updateOne(
+        { token: token.substring(0, 20) },
+        { $set: config }
+      );
+    }
+    console.log(`[Config:GET] Config marked as used, saved successfully`);
 
-    // Log analytics
-    await Analytics.create({
-      type: 'config_accessed',
-      configurationId: config._id,
-      userIp: req.ip,
-      userAgent: req.get('user-agent'),
-      metadata: { appCount: config.selectedApps.length }
-    });
+    // Log analytics (non-critical, don't wait)
+    if (isMongoDBConnected()) {
+      Analytics.create({
+        type: 'config_accessed',
+        configurationId: config._id,
+        userIp: req.ip,
+        userAgent: req.get('user-agent'),
+        metadata: { appCount: config.selectedApps.length }
+      }).catch(err => {
+        console.error('[Config:GET] Analytics create error (non-critical):', err.message);
+      });
+    }
+
+    console.log(`[Config:GET] Returning config successfully`);
 
     res.status(200).json({
       success: true,
@@ -202,10 +230,15 @@ export const getConfig = async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Get config error:', error);
+    console.error('[Config:GET] Error occurred:', error);
+    
     res.status(500).json({
       success: false,
-      message: error.message || 'Failed to fetch configuration'
+      message: error.message || 'Failed to fetch configuration',
+      ...(process.env.NODE_ENV === 'development' && { 
+        error: error.message,
+        stack: error.stack
+      })
     });
   }
 };

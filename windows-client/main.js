@@ -1,9 +1,3 @@
-/**
- * Windows App Manager - Electron Main Process
- * Lightweight Electron app for Windows that replaces the Python client
- * Features: Token management, app downloading, installation
- */
-
 const { 
   app, 
   BrowserWindow, 
@@ -16,7 +10,6 @@ const {
 const path = require('path');
 const os = require('os');
 const fs = require('fs');
-const fetch = require('electron-fetch').default;
 
 let mainWindow;
 let tray;
@@ -51,21 +44,19 @@ function createWindow() {
   });
 
   // Load the app
-  const startUrl = isDev
-    ? 'http://localhost:3001'
-    : `file://${path.join(__dirname, '../index.html')}`;
+  const indexPath = path.join(__dirname, 'index.html');
+  const startUrl = `file://${indexPath}`;
 
   mainWindow.loadURL(startUrl);
 
   // Show window when ready
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
+    // Open dev tools if in development mode
+    if (isDev || process.env.DEBUG) {
+      mainWindow.webContents.openDevTools();
+    }
   });
-
-  // Open dev tools in development
-  if (isDev) {
-    mainWindow.webContents.openDevTools();
-  }
 
   // Handle window closed
   mainWindow.on('closed', () => {
@@ -191,16 +182,23 @@ ipcMain.handle('get-config', async (event, token) => {
       throw new Error('Token is required');
     }
 
-    const response = await fetch(`${apiURL}/config/${token}`);
+    const url = `${apiURL}/config/${token}`;
+    console.log('[IPC] Fetching config from:', url);
+
+    const response = await fetch(url);
+    console.log('[IPC] Response status:', response.status, response.statusText);
 
     if (!response.ok) {
-      throw new Error(`API error: ${response.statusText}`);
+      const errorText = await response.text();
+      console.error('[IPC] Error response body:', errorText);
+      throw new Error(`API error (${response.status}): ${response.statusText}\n${errorText}`);
     }
 
     const data = await response.json();
+    console.log('[IPC] Config loaded successfully');
     return { success: true, config: data };
   } catch (error) {
-    console.error('Get config error:', error);
+    console.error('[IPC] Get config error:', error.message);
     return {
       success: false,
       error: error.message || 'Failed to fetch configuration',
@@ -221,34 +219,28 @@ ipcMain.handle('download-app', async (event, { url, name }) => {
     const fileName = name.replace(/[^a-z0-9]/gi, '_').toLowerCase();
     const filePath = path.join(downloadsDir, fileName);
 
-    // Send progress updates
+    // Fetch the file
     const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`Download failed: ${response.statusText}`);
     }
 
-    const totalSize = response.headers.get('content-length');
+    const totalSize = parseInt(response.headers.get('content-length') || '0');
     let downloadedSize = 0;
 
-    const fileStream = fs.createWriteStream(filePath);
+    const buffer = await response.arrayBuffer();
+    downloadedSize = buffer.byteLength;
 
-    response.body.on('data', (chunk) => {
-      downloadedSize += chunk.length;
-      const progress = totalSize ? (downloadedSize / parseInt(totalSize)) * 100 : 0;
-      
-      event.sender.send('download-progress', {
-        name,
-        progress: Math.round(progress),
-        downloadedSize,
-        totalSize: parseInt(totalSize),
-      });
-    });
+    // Write file to disk
+    fs.writeFileSync(filePath, Buffer.from(buffer));
 
-    await new Promise((resolve, reject) => {
-      response.body.pipe(fileStream);
-      fileStream.on('finish', resolve);
-      fileStream.on('error', reject);
+    // Send progress update
+    event.sender.send('download-progress', {
+      name,
+      progress: 100,
+      downloadedSize,
+      totalSize: downloadedSize,
     });
 
     return {

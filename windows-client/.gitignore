@@ -1,4 +1,5 @@
 # Windows Client .gitignore
+/node_modules/
 __pycache__/
 *.pyc
 *.pyo
@@ -18,3 +19,15 @@ env/
 .pytest_cache/
 *.spec
 test_*.py
+coverage/
+.coverage
+htmlcov/
+*.egg
+*.egg-info/
+*.log
+*.bak
+*.tmp
+*.swp
+*.swo
+*.zip
+*.tar.gz

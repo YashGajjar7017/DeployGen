@@ -1,0 +1,31 @@
+[
+  {
+    "_id": "config_1775293232783",
+    "userId": null,
+    "token": "ca24c365cf4c5b6b7c1e",
+    "tokenHash": "c9d72650685c0517faa5f67a8b6f3ffb47a9607057b461c37acec536e24364a3",
+    "downloadLink": "http://localhost:8000/api/config/ca24c365cf4c5b6b7c1ef9195259a690ca6313a30b3d06af4716e9d37bcf596f",
+    "selectedApps": [
+      {
+        "appId": "vscode",
+        "appName": "Visual Studio Code",
+        "version": "latest"
+      },
+      {
+        "appId": "nodejs",
+        "appName": "Node.js",
+        "version": "latest"
+      }
+    ],
+    "totalFileSize": "~100MB",
+    "expiresAt": "2026-04-04T09:10:32.783Z",
+    "isOneTimeUse": true,
+    "configName": "TestConfig",
+    "description": "For testing",
+    "createdAt": "2026-04-04T09:00:32.783Z",
+    "isUsed": true,
+    "usedAt": "2026-04-04T09:00:44.215Z",
+    "usedIp": "::1",
+    "downloadCount": 1
+  }
+]

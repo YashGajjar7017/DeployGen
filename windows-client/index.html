@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
     />
     <title>App Manager - Windows Client</title>
     <style>
@@ -21,92 +21,495 @@
           sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
       }
 
       #app {
-        width: 100%;
-        height: 100vh;
+        max-width: 600px;
+        margin: 0 auto;
       }
 
-      /* Loading screen */
-      .app-loading {
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+        margin-bottom: 20px;
+      }
+
+      .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        margin: 0 0 10px 0;
+        font-weight: 600;
+      }
+
+      .header p {
+        font-size: 14px;
+        opacity: 0.9;
+        margin: 0;
+      }
+
+      .token-form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .token-input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.2s;
+      }
+
+      .token-input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .token-button {
+        padding: 12px 24px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .token-button:hover:not(:disabled) {
+        background: #5568d3;
+      }
+
+      .token-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .error {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .success {
+        background: #dcfce7;
+        color: #166534;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .app-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .app-item {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .app-icon {
+        width: 40px;
+        height: 40px;
+        background: #dbeafe;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto';
+        color: #1e40af;
+        font-size: 20px;
       }
 
-      .loading-content {
-        text-align: center;
+      .app-info {
+        flex: 1;
+      }
+
+      .app-name {
+        font-weight: 500;
+        color: #1f2937;
+        margin-bottom: 4px;
+      }
+
+      .app-size {
+        font-size: 12px;
+        color: #6b7280;
+      }
+
+      .app-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        white-space: nowrap;
+      }
+
+      .button-primary {
+        background: #667eea;
         color: white;
       }
 
+      .button-primary:hover {
+        background: #5568d3;
+      }
+
+      .button-secondary {
+        background: #e5e7eb;
+        color: #1f2937;
+      }
+
+      .button-secondary:hover {
+        background: #d1d5db;
+      }
+
+      .button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .progress {
+        width: 100%;
+        height: 4px;
+        background: #e5e7eb;
+        border-radius: 2px;
+        overflow: hidden;
+        margin-top: 8px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: #667eea;
+        transition: width 0.3s;
+      }
+
+      .progress-text {
+        font-size: 11px;
+        color: #6b7280;
+        margin-top: 4px;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6b7280;
+      }
+
+      .empty-state-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+
+      .footer {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 12px;
+        margin-top: 20px;
+      }
+
       .loading-spinner {
-        width: 48px;
-        height: 48px;
-        border: 4px solid rgba(255, 255, 255, 0.3);
-        border-top-color: white;
-        border-radius: 50%;
+        display: inline-block;
         animation: spin 1s linear infinite;
-        margin: 0 auto 20px;
       }
 
       @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+        to { transform: rotate(360deg); }
       }
 
-      .loading-text {
-        font-size: 18px;
-        font-weight: 500;
-      }
-
-      .loading-subtext {
-        font-size: 14px;
-        opacity: 0.8;
-        margin-top: 8px;
+      h2 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        color: #1f2937;
+        font-size: 16px;
       }
     </style>
   </head>
 
   <body>
     <div id="app">
-      <div class="app-loading">
-        <div class="loading-content">
-          <div class="loading-spinner"></div>
-          <div class="loading-text">App Manager</div>
-          <div class="loading-subtext">Initializing...</div>
+      <div class="container">
+        <div class="header">
+          <h1>📦 App Manager</h1>
+          <p>Download and install applications with ease</p>
+        </div>
+
+        <div class="card">
+          <form id="tokenForm" class="token-form">
+            <input
+              type="text"
+              id="tokenInput"
+              class="token-input"
+              placeholder="Enter your token..."
+              required
+            />
+            <button type="submit" id="loadButton" class="token-button">
+              Load Apps
+            </button>
+          </form>
+
+          <div id="messageContainer"></div>
+          <div id="appListContainer"></div>
+        </div>
+
+        <div class="footer">
+          <p>Version 1.0.0 | © 2026 App Manager</p>
+          <p>Electron-based Application Manager for Windows</p>
         </div>
       </div>
     </div>
 
     <script>
+      // App state
+      let currentConfig = null;
+      let downloadProgress = {};
+
+      // Get DOM elements
+      const tokenForm = document.getElementById('tokenForm');
+      const tokenInput = document.getElementById('tokenInput');
+      const loadButton = document.getElementById('loadButton');
+      const messageContainer = document.getElementById('messageContainer');
+      const appListContainer = document.getElementById('appListContainer');
+
       // Check if Electron API is available
-      if (typeof window.electronAPI === 'undefined') {
-        console.warn('Electron API not available. Running in development mode.');
+      const hasElectronAPI = typeof window.electronAPI !== 'undefined';
+
+      console.log('=== App Manager Electron Client ===');
+      console.log('Electron API available:', hasElectronAPI);
+
+      // Handle form submission
+      tokenForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await loadConfig();
+      });
+
+      // Load configuration
+      async function loadConfig() {
+        const token = tokenInput.value.trim();
+
+        if (!token) {
+          showMessage('Please enter a valid token', 'error');
+          return;
+        }
+
+        loadButton.disabled = true;
+        loadButton.textContent = '⏳ Loading...';
+
+        try {
+          if (!hasElectronAPI) {
+            throw new Error('Electron API not available. Is this running in Electron?');
+          }
+
+          console.log('[Frontend] Requesting config for token:', token.substring(0, 10) + '...');
+          const result = await window.electronAPI.getConfig(token);
+          console.log('[Frontend] Config result:', result);
+
+          if (!result.success) {
+            const errorMsg = result.error || 'Failed to fetch configuration';
+            throw new Error(`Backend returned error: ${errorMsg}`);
+          }
+
+          currentConfig = result.config;
+          downloadProgress = {};
+          showMessage('Configuration loaded successfully!', 'success');
+          renderAppList();
+        } catch (error) {
+          console.error('[Frontend] Error loading config:', error);
+          const displayError = `Error: ${error.message}\n\n📝 Check the browser console (F12) and Electron main process console for details.`;
+          showMessage(displayError, 'error');
+        } finally {
+          loadButton.disabled = false;
+          loadButton.textContent = 'Load Apps';
+        }
       }
 
-      // Log app startup
-      console.log('App Manager Windows Client - Initializing...');
-      console.log('Node version:', process.versions.node);
-      console.log('Chrome version:', process.versions.chrome);
-      console.log('Electron version:', process.versions.electron);
-    </script>
+      // Show message
+      function showMessage(text, type = 'error') {
+        const className = type === 'error' ? 'error' : 'success';
+        messageContainer.innerHTML = `<div class="${className}">${text}</div>`;
+        setTimeout(() => {
+          messageContainer.innerHTML = '';
+        }, 5000);
+      }
 
-    <!-- React and ReactDOM for development -->
-    <!-- In production, use a built bundle -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+      // Render app list
+      function renderAppList() {
+        if (!currentConfig || !currentConfig.selectedApps || currentConfig.selectedApps.length === 0) {
+          appListContainer.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-state-icon">🔐</div>
+              <p>Enter your token to load your configured applications</p>
+            </div>
+          `;
+          return;
+        }
 
-    <!-- Your app component will be mounted here -->
-    <script type="module">
-      // This is where your bundled app will be loaded
-      // For development, you might use Vite or webpack
-      console.log('Loading App Manager component...');
+        let html = `<h2>Selected Applications (${currentConfig.selectedApps.length})</h2><div class="app-list">`;
+
+        for (const app of currentConfig.selectedApps) {
+          const progress = downloadProgress[app.appName] || {};
+          const isDownloadedKey = `${app.appName}_downloaded`;
+          const isDownloaded = localStorage.getItem(isDownloadedKey) === 'true';
+          const downloadPct = progress.progress || 0;
+
+          html += `
+            <div class="app-item">
+              <div class="app-icon">📱</div>
+              <div class="app-info">
+                <div class="app-name">${app.appName}</div>
+                <div class="app-size">${app.fileSize || 'Size unknown'}</div>
+                ${progress.progress ? `
+                  <div class="progress">
+                    <div class="progress-bar" style="width: ${downloadPct}%"></div>
+                  </div>
+                  <div class="progress-text">${downloadPct}% downloaded</div>
+                ` : ''}
+              </div>
+              <div class="app-actions">
+                <button 
+                  class="button button-primary" 
+                  onclick="downloadApp('${encodeURIComponent(JSON.stringify(app))}', '${app.appName}')"
+                  ${isDownloaded ? 'disabled' : ''}
+                >
+                  ${isDownloaded ? '✓ Downloaded' : '📥 Download'}
+                </button>
+                ${isDownloaded ? `
+                  <button 
+                    class="button button-secondary" 
+                    onclick="installApp('${encodeURIComponent(JSON.stringify(app))}')"
+                  >
+                    ⚡ Install
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        }
+
+        html += '</div>';
+        appListContainer.innerHTML = html;
+      }
+
+      // Download app
+      async function downloadApp(appJson, appName) {
+        const app = JSON.parse(decodeURIComponent(appJson));
+
+        if (!app.downloadUrl) {
+          showMessage('Download URL not available', 'error');
+          return;
+        }
+
+        try {
+          if (!hasElectronAPI) {
+            throw new Error('Electron API not available');
+          }
+
+          const result = await window.electronAPI.downloadApp(
+            app.downloadUrl,
+            app.appName
+          );
+
+          if (!result.success) {
+            throw new Error(result.error || 'Download failed');
+          }
+
+          localStorage.setItem(`${appName}_downloaded`, 'true');
+          showMessage(`Downloaded: ${appName}`, 'success');
+          renderAppList();
+        } catch (error) {
+          showMessage(error.message, 'error');
+          console.error('Download error:', error);
+        }
+      }
+
+      // Install app
+      async function installApp(appJson) {
+        const app = JSON.parse(decodeURIComponent(appJson));
+
+        if (!app.silentInstallCmd) {
+          showMessage('Installation command not available', 'error');
+          return;
+        }
+
+        try {
+          if (!hasElectronAPI) {
+            throw new Error('Electron API not available');
+          }
+
+          // Get the downloaded file path from progress or show instructions
+          const progress = downloadProgress[app.appName];
+          const isDownloaded = localStorage.getItem(`${app.appName}_downloaded`) === 'true';
+
+          if (!isDownloaded) {
+            showMessage('Please download the app first', 'error');
+            return;
+          }
+
+          const result = await window.electronAPI.installApp(
+            progress?.filePath || `${app.appName}.exe`,
+            app.silentInstallCmd
+          );
+
+          if (!result.success) {
+            throw new Error(result.error || 'Installation failed');
+          }
+
+          showMessage(`Installation prepared! Command: ${result.command}`, 'success');
+        } catch (error) {
+          showMessage(error.message, 'error');
+          console.error('Install error:', error);
+        }
+      }
+
+      // Show initial empty state
+      appListContainer.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-state-icon">🔐</div>
+          <p>Enter your token to load your configured applications</p>
+          <p style="font-size: 11px; margin-top: 8px;">
+            Get a token from the App Manager dashboard
+          </p>
+        </div>
+      `;
     </script>
   </body>
 </html>
