@@ -1,5 +1,5 @@
 /**
- * Preload Script - Windows App Manager
+ * Preload Script - Windows DeployGEN
  * Safely exposes IPC functionality to renderer process
  */
 

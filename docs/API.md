@@ -3,7 +3,7 @@
 ## Base URL
 ```
 Development: http://localhost:5000/api
-Production: https://api.appmanager.com/api
+Production: https://api.deploygen.com/api
 ```
 
 ## Authentication

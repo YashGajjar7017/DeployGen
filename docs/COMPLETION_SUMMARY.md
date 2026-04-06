@@ -1,8 +1,8 @@
-# 🎉 AppManager - Complete Project Build Summary
+# 🎉 DeployGEN - Complete Project Build Summary
 
 ## ✅ Project Completion
 
-Your production-ready **AppManager** system has been successfully built! This is a complete, full-stack application with:
+Your production-ready **DeployGEN** system has been successfully built! This is a complete, full-stack application with:
 
 - ✅ **Backend API** (Node.js/Express)
 - ✅ **Frontend Dashboard** (Next.js/React)
@@ -570,11 +570,11 @@ Before deploying to production:
 
 ## 📞 Support Resources
 
-- 📧 **Email**: support@appmanager.com
-- 💬 **Discord**: [Join Community](https://discord.gg/appmanager)
+- 📧 **Email**: support@deploygen.com
+- 💬 **Discord**: [Join Community](https://discord.gg/deploygen)
 - 📖 **Docs**: See `/docs` folder
 - 🐛 **Issues**: GitHub Issues
-- 📺 **Videos**: [YouTube Channel](https://youtube.com/appmanager)
+- 📺 **Videos**: [YouTube Channel](https://youtube.com/deploygen)
 
 ---
 

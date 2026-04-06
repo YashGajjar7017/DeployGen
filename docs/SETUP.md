@@ -119,7 +119,7 @@ git push origin main
 # Vercel auto-detects it's a Next.js app
 
 # 3. Set environment variables
-# NEXT_PUBLIC_API_URL=https://api.appmanager.com/api
+# NEXT_PUBLIC_API_URL=https://api.deploygen.com/api
 ```
 
 #### Option 2: Manual Deployment
@@ -156,8 +156,8 @@ railway link
 MONGODB_URI=mongodb+srv://...
 JWT_SECRET=your-production-secret
 NODE_ENV=production
-API_URL=https://api.appmanager.com
-FRONTEND_URL=https://appmanager.com
+API_URL=https://api.deploygen.com
+FRONTEND_URL=https://deploygen.com
 
 # Deploy
 git push
@@ -224,11 +224,11 @@ pip install pyinstaller
 
 # Build standalone executable
 pyinstaller --onefile --windowed \
-  --name AppManager \
+  --name DeployGEN \
   --icon=assets/app.ico \
   src/gui_client.py
 
-# Executable will be in: dist/AppManager.exe
+# Executable will be in: dist/DeployGEN.exe
 ```
 
 #### Create Installer (Optional)
@@ -263,7 +263,7 @@ iscc script.iss
 
 # 2. Create Windows Installer
 # Users can run standard installer
-# AppManager appears in Add/Remove Programs
+# DeployGEN appears in Add/Remove Programs
 
 # 3. Cloud Storage
 # Upload to OneDrive, Google Drive, Dropbox
@@ -328,7 +328,7 @@ NEXT_PUBLIC_API_URL=https://api.appmanager.com/api
 # Railway can use auto-SSL or custom domain
 
 # Custom domain with Let's Encrypt
-certbot certonly --standalone -d api.appmanager.com -d appmanager.com
+certbot certonly --standalone -d api.deploygen.com -d deploygen.com
 ```
 
 ---
@@ -488,7 +488,7 @@ cron: 0 2 * * 0 mongodump --uri="..." --archive=/backups/app-manager-weekly.arch
 
 ```bash
 # Check backend health
-curl https://api.appmanager.com/api/health
+curl https://api.deploygen.com/api/health
 
 # Monitor logs
 tail -f ~/.pm2/logs/app-manager-error.log

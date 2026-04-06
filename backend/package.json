@@ -1,7 +1,7 @@
 {
   "name": "app-manager-backend",
   "version": "1.0.0",
-  "description": "App Manager Backend API - Generate secure tokens for app installation",
+  "description": "DeployGEN Backend API - Generate secure tokens for app installation",
   "main": "src/server.js",
   "type": "module",
   "scripts": {

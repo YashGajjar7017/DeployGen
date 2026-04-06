@@ -367,7 +367,7 @@ export default function AppManager() {
 
       <div className="container">
         <div className="header">
-          <h1>📦 App Manager</h1>
+          <h1>📦 DeployGEN</h1>
           <p>Download and install applications with ease</p>
         </div>
 
@@ -394,7 +394,7 @@ export default function AppManager() {
               <div className="empty-state-icon">🔐</div>
               <p>Enter your token to load your configured applications</p>
               <p style={{ fontSize: '11px', marginTop: '8px' }}>
-                Get a token from the App Manager dashboard
+                Get a token from the DeployGEN dashboard
               </p>
             </div>
           )}
@@ -469,7 +469,7 @@ export default function AppManager() {
         </div>
 
         <div className="footer">
-          <p>Version 1.0.0 | © 2026 App Manager</p>
+          <p>Version 1.0.0 | © 2026 DeployGEN</p>
           <p>Electron-based Application Manager for Windows</p>
         </div>
       </div>

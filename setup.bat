@@ -1,6 +1,6 @@
 @echo off
-REM AppManager Quick Start Script for Windows
-REM Automatically sets up and runs AppManager locally
+REM DeployGEN Quick Start Script for Windows
+REM Automatically sets up and runs DeployGEN locally
 
 echo.
 echo ╔════════════════════════════════════════╗

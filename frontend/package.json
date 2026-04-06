@@ -2,7 +2,7 @@
 "name": "app-manager-frontend",
   "type": "module",
   "version": "1.0.0",
-  "description": "App Manager Frontend - Select apps and generate installation configs",
+  "description": "DeployGEN Frontend - Select apps and generate installation configs",
   "private": true,
   "scripts": {
     "dev": "next dev",

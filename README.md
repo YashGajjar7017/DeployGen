@@ -1,4 +1,4 @@
-# AppManager - Automated Software Installation
+# DeployGEN - Automated Software Installation
 
 A production-ready web application that allows users to select multiple software applications, generate secure tokens, and automatically install them using a Windows desktop client. No more manual installations!
 
@@ -20,7 +20,7 @@ A production-ready web application that allows users to select multiple software
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    AppManager System                     │
+│                    DeployGEN System                     │
 ├─────────────────────────────────────────────────────────┤
 │                                                           │
 │  ┌─────────────┐         ┌──────────────┐              │
@@ -216,7 +216,7 @@ python src/gui_client.py
 powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
-**Built executable will be in**: `dist/AppManager.exe`
+**Built executable will be in**: `dist/DeployGEN.exe`
 
 ---
 
@@ -384,7 +384,7 @@ git push origin main
 vercel link
 
 # 3. Set environment variables
-vercel env add NEXT_PUBLIC_API_URL https://api.appmanager.com/api
+vercel env add NEXT_PUBLIC_API_URL https://api.deploygen.com/api
 
 # 4. Deploy
 vercel --prod
@@ -423,7 +423,7 @@ git push
 2. Create database user and password
 3. Whitelist IPs (0.0.0.0/0 for development)
 4. Get connection string
-5. Add to `.env`: `MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/appmanager?retryWrites=true&w=majority`
+5. Add to `.env`: `MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/deploygen?retryWrites=true&w=majority`
 
 ### Windows Client Distribution
 ```bash
@@ -431,7 +431,7 @@ git push
 cd windows-client
 powershell -ExecutionPolicy Bypass -File build.ps1
 
-# Distribute AppManager.exe to users
+# Distribute DeployGEN.exe to users
 # Users can run directly without Python installed
 ```
 
@@ -440,7 +440,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 ## 💡 Usage Examples
 
 ### Example 1: User Creates Setup
-1. Visit `https://appmanager.com`
+1. Visit `https://deploygen.com`
 2. Log in or browse as guest
 3. Select: Chrome, VS Code, Node.js
 4. Click "Generate Setup"
@@ -450,7 +450,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 
 ### Example 2: User Runs Installation
 1. Download Windows Client executable
-2. Run `AppManager.exe`
+2. Run `DeployGEN.exe`
 3. Paste token in input field
 4. Click "Fetch Configuration"
 5. Review selected apps (3 apps, ~210MB)
@@ -494,12 +494,12 @@ RATE_LIMIT_WINDOW_MS=900000
 RATE_LIMIT_MAX_REQUESTS=100
 
 # CORS
-FRONTEND_URL=https://appmanager.com
+FRONTEND_URL=https://deploygen.com
 ```
 
 ### Frontend `.env.local`
 ```env
-NEXT_PUBLIC_API_URL=https://api.appmanager.com/api
+NEXT_PUBLIC_API_URL=https://api.deploygen.com/api
 ```
 
 ---

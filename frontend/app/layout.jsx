@@ -8,7 +8,7 @@ import Header from '@/app/components/Header';
 import { Providers } from '@/app/providers';
 
 export const metadata = {
-  title: 'AppManager - Automated Software Installation',
+  title: 'DeployGEN - Automated Software Installation',
   description: 'Select apps, generate secure tokens, and install everything with one click',
 };
 

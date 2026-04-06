@@ -90,7 +90,7 @@ export default function SignupPage() {
             Create Account
           </h1>
           <p className="text-slate-600 dark:text-slate-300 text-center mb-6">
-            Join AppManager and start automating your setup
+            Join DeployGEN and start automating your setup
           </p>
 
           {formError && (
@@ -267,7 +267,7 @@ export default function SignupPage() {
 
         {/* Footer */}
         <p className="text-center text-slate-500 dark:text-slate-400 text-xs mt-6 animate-fadeIn" style={{ animationDelay: '0.5s' }}>
-          © 2024 AppManager. Secure and fast app installation.
+          © 2024 DeployGEN. Secure and fast app installation.
         </p>
       </div>
     </div>

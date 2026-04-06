@@ -307,7 +307,7 @@ git add requirements.txt
 
 **Do not** open public GitHub issues for security vulnerabilities.
 
-Instead, email: `security@appmanager.com` with:
+Instead, email: `security@deploygen.com` with:
 - Description of vulnerability
 - Affected versions
 - Proposed fix (if any)
@@ -429,12 +429,12 @@ Reviewers should verify:
 
 ## 📞 Questions?
 
-- 💬 Discord: [Join our server](https://discord.gg/appmanager)
-- 📧 Email: dev@appmanager.com
-- 📖 Documentation: [docs.appmanager.com](https://docs.appmanager.com)
+- 💬 Discord: [Join our server](https://discord.gg/deploygen)
+- 📧 Email: dev@deploygen.com
+- 📖 Documentation: [docs.deploygen.com](https://docs.deploygen.com)
 
 ---
 
 ## Thank You! 🙏
 
-Your contributions make AppManager better for everyone!
+Your contributions make DeployGEN better for everyone!

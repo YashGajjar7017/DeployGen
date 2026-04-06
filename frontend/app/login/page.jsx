@@ -153,7 +153,7 @@ export default function LoginPage() {
 
         {/* Footer */}
         <p className="text-center text-slate-500 dark:text-slate-400 text-xs mt-6 animate-fadeIn" style={{ animationDelay: '0.6s' }}>
-          © 2024 AppManager. Secure and fast app installation.
+          © 2024 DeployGEN. Secure and fast app installation.
         </p>
       </div>
     </div>

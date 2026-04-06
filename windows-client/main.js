@@ -116,8 +116,8 @@ function createMenu() {
           click: () => {
             dialog.showMessageBox(mainWindow, {
               type: 'info',
-              title: 'About App Manager',
-              message: 'App Manager Windows Client',
+              title: 'About DeployGEN',
+              message: 'DeployGEN Windows Client',
               detail: 'Version 1.0.0\nElectron-based app downloader and installer',
             });
           },
@@ -140,7 +140,7 @@ function createTray() {
   const trayIcon = nativeImage.createEmpty().resize({ width: 16, height: 16 });
 
   tray = new Tray(trayIcon);
-  tray.setToolTip('App Manager');
+  tray.setToolTip('DeployGEN');
 
   const contextMenu = Menu.buildFromTemplate([
     {

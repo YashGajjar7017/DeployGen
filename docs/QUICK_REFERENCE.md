@@ -1,4 +1,4 @@
-# AppManager - Quick Reference Guide
+# DeployGEN - Quick Reference Guide
 
 ## 🚀 Start Project in 5 Minutes
 

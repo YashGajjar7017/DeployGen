@@ -82,7 +82,7 @@ cd ..
 echo ""
 echo "✅ Setup complete!"
 echo ""
-echo "🚀 To start AppManager, run in separate terminals:"
+echo "🚀 To start DeployGEN, run in separate terminals:"
 echo ""
 echo "Terminal 1 - Backend:"
 echo "  cd backend && npm run dev"

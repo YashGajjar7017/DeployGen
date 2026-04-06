@@ -41,7 +41,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-white dark:bg-slate-900 min-h-screen">
-      <Header />
+      {/* <Header /> */}
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-900 py-16 md:py-24 relative overflow-hidden">
@@ -72,8 +72,8 @@ export default function ContactPage() {
             </div>
             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Email</h3>
             <p className="text-slate-600 dark:text-slate-300 mb-4">Send us an email and we'll respond as soon as possible.</p>
-            <a href="mailto:support@appmanager.com" className="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
-              support@appmanager.com
+            <a href="mailto:support@deploygen.com" className="text-blue-600 dark:text-blue-400 font-semibold hover:underline">
+              support@deploygen.com
             </a>
           </div>
 
@@ -255,7 +255,7 @@ export default function ContactPage() {
       <section className="bg-gradient-to-r from-blue-600 to-cyan-600 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">Ready to streamline your setup?</h2>
-          <p className="text-blue-100 mb-8 text-lg">Join thousands of developers using AppManager</p>
+          <p className="text-blue-100 mb-8 text-lg">Join thousands of developers using DeployGEN</p>
         </div>
       </section>
     </div>

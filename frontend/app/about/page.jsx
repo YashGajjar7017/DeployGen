@@ -19,7 +19,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center animate-slideInDown">
             <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white mb-4">
-              About <span className="text-purple-600">AppManager</span>
+              About <span className="text-purple-600">DeployGEN</span>
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
               Simplifying development setup for developers worldwide
@@ -37,7 +37,7 @@ export default function AboutPage() {
               We believe setting up development environments shouldn't be complicated. Just because you're a developer doesn't mean you need to spend hours configuring tools and installing applications.
             </p>
             <p className="text-lg text-slate-600 dark:text-slate-300 mb-6">
-              AppManager transforms the way developers install and manage their tools. With a single click, set up your entire development environment exactly the way you need it.
+              DeployGEN transforms the way developers install and manage their tools. With a single click, set up your entire development environment exactly the way you need it.
             </p>
             <div className="flex gap-4">
               <Zap className="text-purple-600 flex-shrink-0" size={32} />

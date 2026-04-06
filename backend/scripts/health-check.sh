@@ -4,7 +4,7 @@
 
 echo ""
 echo "═══════════════════════════════════════════════════════════"
-echo "🏥 AppManager MongoDB Health Check"
+echo "🏥 DeployGEN MongoDB Health Check"
 echo "═══════════════════════════════════════════════════════════"
 echo ""
 
