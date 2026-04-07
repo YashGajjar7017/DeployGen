@@ -1,6 +1,5 @@
 /**
  * Token Display Component
- * Shows the generated token and download link
  */
 
 'use client';
