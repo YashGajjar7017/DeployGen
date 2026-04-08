@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import connectDB, { getDBStatus } from './config/database.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { cacheMiddleware } from './middleware/caching.js';
 
 // Routes
 import healthRoutes from './routes/healthRoutes.js';
@@ -47,6 +48,9 @@ const limiter = rateLimit({
 });
 
 app.use(limiter);
+
+// Response caching middleware for faster responses
+app.use(cacheMiddleware);
 
 // ==================== ROUTES ====================
 
