@@ -590,9 +590,9 @@ Contributions welcome! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ## 📞 Support
 
-- 📧 Email: support@appmanager.com
+- 📧 Email: codingwithyashacker17@gmail.com
 - 🐛 Issues: GitHub Issues
-- 💬 Discord: [Join Server](https://discord.gg/appmanager)
+- 💬 Discord: [Join Server](https://discord.gg/DeployGEN)
 
 ---
 
