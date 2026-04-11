@@ -7,6 +7,9 @@ import connectDB, { getDBStatus } from './config/database.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { cacheMiddleware } from './middleware/caching.js';
 
+// Models (ensure they're initialized)
+import MaintenanceConfig from './models/MaintenanceConfig.js';
+
 // Routes
 import healthRoutes from './routes/healthRoutes.js';
 import authRoutes from './routes/authRoutes.js';

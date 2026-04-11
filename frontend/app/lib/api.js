@@ -62,9 +62,20 @@ export const configAPI = {
 // ==================== ADMIN ENDPOINTS ====================
 
 export const adminAPI = {
+  // Analytics
   getAnalytics: () => apiClient.get('/admin/analytics'),
   getTopApps: () => apiClient.get('/admin/analytics/top-apps'),
   getActiveUsers: () => apiClient.get('/admin/analytics/active-users'),
+  
+  // Maintenance
+  getMaintenance: () => apiClient.get('/admin/maintenance'),
+  updateMaintenance: (data) => apiClient.put('/admin/maintenance', data),
+  
+  // App Management
+  getAllApps: () => apiClient.get('/admin/apps'),
+  createApp: (data) => apiClient.post('/admin/apps', data),
+  updateApp: (id, data) => apiClient.put(`/admin/apps/${id}`, data),
+  deleteApp: (id) => apiClient.delete(`/admin/apps/${id}`),
 };
 
 export default apiClient;

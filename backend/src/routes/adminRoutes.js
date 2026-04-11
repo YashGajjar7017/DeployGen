@@ -8,8 +8,26 @@ import { protect, adminOnly } from '../middleware/auth.js';
 import Analytics from '../models/Analytics.js';
 import User from '../models/User.js';
 import Configuration from '../models/Configuration.js';
+import {
+  getMaintenanceStatus,
+  updateMaintenanceStatus,
+  getAllAppsAdmin,
+  createApp,
+  updateApp,
+  deleteApp
+} from '../controllers/adminController.js';
 
 const router = express.Router();
+
+// Maintenance routes (public read, admin write)
+router.get('/maintenance', getMaintenanceStatus);
+router.put('/maintenance', protect, adminOnly, updateMaintenanceStatus);
+
+// App management routes (admin only)
+router.get('/apps', protect, adminOnly, getAllAppsAdmin);
+router.post('/apps', protect, adminOnly, createApp);
+router.put('/apps/:id', protect, adminOnly, updateApp);
+router.delete('/apps/:id', protect, adminOnly, deleteApp);
 
 /**
  * Get analytics dashboard

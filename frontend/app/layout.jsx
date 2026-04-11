@@ -3,24 +3,48 @@
  * Main layout with theme provider and global components
  */
 
+'use client';
+
+import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import './globals.css';
 import Header from '@/app/components/Header';
 import { Providers } from '@/app/providers';
 
-export const metadata = {
-  title: 'DeployGEN - Automated Software Installation',
-  description: 'Select apps, generate secure tokens, and install everything with one click',
-  icons: {
-    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="50" font-weight="bold" text-anchor="middle" dy=".3em" fill="%237c3aed">D</text></svg>'
-  }
-};
-
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkMaintenance = async () => {
+      try {
+        const response = await fetch('/api/admin/maintenance');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.isEnabled && pathname !== '/maintenance') {
+            setIsMaintenanceMode(true);
+            router.push('/maintenance');
+          }
+        }
+      } catch (error) {
+        console.log('Maintenance check failed');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkMaintenance();
+  }, [pathname, router]);
+
+  if (loading) return null;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
         <Providers>
-          <Header />
+          {pathname !== '/maintenance' && <Header />}
           <main className="min-h-screen">
             {children}
           </main>

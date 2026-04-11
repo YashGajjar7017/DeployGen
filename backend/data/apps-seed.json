@@ -1,0 +1,977 @@
+[
+  {
+    "name": "Google Chrome",
+    "slug": "google-chrome",
+    "description": "Fast, secure web browser built for the modern web with access to Google services.",
+    "category": "Browser",
+    "icon": "https://www.google.com/chrome/static/images/chrome-logo.svg",
+    "homepage": "https://www.google.com/chrome/",
+    "publisher": "Google LLC",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "latest",
+    "latestDownloadUrl": "https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi",
+    "size": "~100MB",
+    "versions": [
+      {
+        "version": "120.0.6099.71",
+        "downloadUrl": "https://dl.google.com/chrome/install/googlechromestandaloneenterprise64.msi",
+        "releaseDate": "2024-01-01T00:00:00.000Z",
+        "size": "~100MB",
+        "changelog": "Stability and performance improvements",
+        "isLatest": true
+      },
+      {
+        "version": "119.0.6045.159",
+        "downloadUrl": "https://dl.google.com/chrome/install/previous/chrome_119.0.6045.159.msi",
+        "releaseDate": "2023-12-01T00:00:00.000Z",
+        "size": "~98MB",
+        "changelog": "Security fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 2847,
+    "rating": 4.8,
+    "tags": ["browser", "web", "google", "chrome"],
+    "systemRequirements": "Windows 10+, 4GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Visual Studio Code",
+    "slug": "visual-studio-code",
+    "description": "Free, open-source code editor with powerful extensions and Git integration.",
+    "category": "IDE",
+    "icon": "https://code.visualstudio.com/favicon.ico",
+    "homepage": "https://code.visualstudio.com/",
+    "publisher": "Microsoft",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "latest",
+    "latestDownloadUrl": "https://aka.ms/win32-x64-user-stable",
+    "size": "~60MB",
+    "versions": [
+      {
+        "version": "1.87.2",
+        "downloadUrl": "https://aka.ms/win32-x64-user-stable",
+        "releaseDate": "2024-01-10T00:00:00.000Z",
+        "size": "~60MB",
+        "changelog": "New features and bug fixes",
+        "isLatest": true
+      },
+      {
+        "version": "1.86.2",
+        "downloadUrl": "https://update.code.visualstudio.com/1.86.2/win32-x64-user/stable",
+        "releaseDate": "2023-12-15T00:00:00.000Z",
+        "size": "~58MB",
+        "changelog": "Performance improvements",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 5234,
+    "rating": 4.9,
+    "tags": ["editor", "code", "vscode", "microsoft"],
+    "systemRequirements": "Windows 10+, 1.6GHz CPU",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Node.js",
+    "slug": "nodejs",
+    "description": "JavaScript runtime built on Chrome's V8 engine for server-side applications.",
+    "category": "Runtime",
+    "icon": "https://nodejs.org/static/images/logo.svg",
+    "homepage": "https://nodejs.org/",
+    "publisher": "Node.js Foundation",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "20.9.0",
+    "latestDownloadUrl": "https://nodejs.org/dist/v20.9.0/node-v20.9.0-x64.msi",
+    "size": "~50MB",
+    "versions": [
+      {
+        "version": "20.9.0",
+        "downloadUrl": "https://nodejs.org/dist/v20.9.0/node-v20.9.0-x64.msi",
+        "releaseDate": "2023-10-17T00:00:00.000Z",
+        "size": "~50MB",
+        "changelog": "LTS release with stability updates",
+        "isLatest": true
+      },
+      {
+        "version": "18.19.0",
+        "downloadUrl": "https://nodejs.org/dist/v18.19.0/node-v18.19.0-x64.msi",
+        "releaseDate": "2023-11-07T00:00:00.000Z",
+        "size": "~48MB",
+        "changelog": "Previous LTS",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 4123,
+    "rating": 4.7,
+    "tags": ["javascript", "runtime", "server", "npm"],
+    "systemRequirements": "Windows 10+, 4GB RAM recommended",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Git",
+    "slug": "git",
+    "description": "Distributed version control system for tracking changes in source code.",
+    "category": "VCS",
+    "icon": "https://git-scm.com/images/logo@2x.png",
+    "homepage": "https://git-scm.com/",
+    "publisher": "Git Project",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "2.42.0.windows.2",
+    "latestDownloadUrl": "https://github.com/git-for-windows/git/releases/download/v2.42.0.windows.2/Git-2.42.0.2-64-bit.exe",
+    "size": "~70MB",
+    "versions": [
+      {
+        "version": "2.42.0.windows.2",
+        "downloadUrl": "https://github.com/git-for-windows/git/releases/download/v2.42.0.windows.2/Git-2.42.0.2-64-bit.exe",
+        "releaseDate": "2023-11-20T00:00:00.000Z",
+        "size": "~70MB",
+        "changelog": "Performance improvements and bug fixes",
+        "isLatest": true
+      },
+      {
+        "version": "2.41.0.windows.3",
+        "downloadUrl": "https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.3/Git-2.41.0.3-64-bit.exe",
+        "releaseDate": "2023-09-01T00:00:00.000Z",
+        "size": "~68MB",
+        "changelog": "Security updates",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1987,
+    "rating": 4.6,
+    "tags": ["git", "version-control", "scm", "source-control"],
+    "systemRequirements": "Windows 7+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Python 3.11",
+    "slug": "python-3-11",
+    "description": "Python programming language interpreter for versatile application development.",
+    "category": "Runtime",
+    "icon": "https://www.python.org/static/community_logos/python-logo.png",
+    "homepage": "https://www.python.org/",
+    "publisher": "Python Software Foundation",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "3.11.5",
+    "latestDownloadUrl": "https://www.python.org/ftp/python/3.11.5/python-3.11.5-amd64.exe",
+    "size": "~100MB",
+    "versions": [
+      {
+        "version": "3.11.5",
+        "downloadUrl": "https://www.python.org/ftp/python/3.11.5/python-3.11.5-amd64.exe",
+        "releaseDate": "2023-10-07T00:00:00.000Z",
+        "size": "~100MB",
+        "changelog": "Security and maintenance release",
+        "isLatest": true
+      },
+      {
+        "version": "3.11.4",
+        "downloadUrl": "https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe",
+        "releaseDate": "2023-08-07T00:00:00.000Z",
+        "size": "~98MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 3678,
+    "rating": 4.8,
+    "tags": ["python", "scripting", "programming", "pip"],
+    "systemRequirements": "Windows 10+, 2GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Docker Desktop",
+    "slug": "docker-desktop",
+    "description": "Container platform for developing, shipping, and running applications.",
+    "category": "Containers",
+    "icon": "https://www.docker.com/favicon.ico",
+    "homepage": "https://www.docker.com/",
+    "publisher": "Docker Inc.",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "latest",
+    "latestDownloadUrl": "https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe",
+    "size": "~700MB",
+    "versions": [
+      {
+        "version": "4.25.2",
+        "downloadUrl": "https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe",
+        "releaseDate": "2024-01-15T00:00:00.000Z",
+        "size": "~700MB",
+        "changelog": "New Kubernetes features",
+        "isLatest": true
+      },
+      {
+        "version": "4.24.0",
+        "downloadUrl": "https://desktop.docker.com/win/main/amd64/4.24.0/Docker%20Desktop%20Installer.exe",
+        "releaseDate": "2023-12-01T00:00:00.000Z",
+        "size": "~680MB",
+        "changelog": "Stability improvements",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1564,
+    "rating": 4.5,
+    "tags": ["docker", "containers", "kubernetes", "devops"],
+    "systemRequirements": "Windows 10 Pro/Enterprise, Hyper-V, 4GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Postman",
+    "slug": "postman",
+    "description": "API development environment for building and testing APIs.",
+    "category": "Tools",
+    "icon": "https://www.postman.com/_pages/api-platform/favicon-32x32.png",
+    "homepage": "https://www.postman.com/",
+    "publisher": "Postman Inc.",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "latest",
+    "latestDownloadUrl": "https://dl.pstmn.io/download/latest/win64",
+    "size": "~200MB",
+    "versions": [
+      {
+        "version": "11.6.0",
+        "downloadUrl": "https://dl.pstmn.io/download/latest/win64",
+        "releaseDate": "2024-01-12T00:00:00.000Z",
+        "size": "~200MB",
+        "changelog": "New API testing features",
+        "isLatest": true
+      },
+      {
+        "version": "11.5.0",
+        "downloadUrl": "https://dl.pstmn.io/download/version/11.5.0/windows64/Postman-win64-11.5.0-Setup.exe",
+        "releaseDate": "2023-12-01T00:00:00.000Z",
+        "size": "~195MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 2341,
+    "rating": 4.7,
+    "tags": ["api", "testing", "http", "rest"],
+    "systemRequirements": "Windows 10+, 4GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "MongoDB Community",
+    "slug": "mongodb-community",
+    "description": "MongoDB Community Server - document-oriented NoSQL database.",
+    "category": "Database",
+    "icon": "https://www.mongodb.com/favicon.ico",
+    "homepage": "https://www.mongodb.com/",
+    "publisher": "MongoDB Inc.",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "6.0.9",
+    "latestDownloadUrl": "https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-6.0.9-signed.msi",
+    "size": "~350MB",
+    "versions": [
+      {
+        "version": "6.0.9",
+        "downloadUrl": "https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-6.0.9-signed.msi",
+        "releaseDate": "2023-04-13T00:00:00.000Z",
+        "size": "~350MB",
+        "changelog": "Security and performance improvements",
+        "isLatest": true
+      },
+      {
+        "version": "6.0.8",
+        "downloadUrl": "https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-6.0.8-signed.msi",
+        "releaseDate": "2023-03-01T00:00:00.000Z",
+        "size": "~345MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1892,
+    "rating": 4.6,
+    "tags": ["mongodb", "nosql", "database", "json"],
+    "systemRequirements": "Windows 10+, 4GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "PuTTY",
+    "slug": "putty",
+    "description": "SSH and telnet client for secure remote access and file transfer.",
+    "category": "Tools",
+    "icon": "https://www.putty.org/favicon.ico",
+    "homepage": "https://www.putty.org/",
+    "publisher": "Simon Tatham",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "0.78",
+    "latestDownloadUrl": "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.78-installer.msi",
+    "size": "~5MB",
+    "versions": [
+      {
+        "version": "0.78",
+        "downloadUrl": "https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.78-installer.msi",
+        "releaseDate": "2023-09-17T00:00:00.000Z",
+        "size": "~5MB",
+        "changelog": "Security fixes",
+        "isLatest": true
+      },
+      {
+        "version": "0.77",
+        "downloadUrl": "https://the.earth.li/~sgtatham/putty/0.77/w64/putty-64bit-0.77-installer.msi",
+        "releaseDate": "2023-06-01T00:00:00.000Z",
+        "size": "~4.8MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 876,
+    "rating": 4.4,
+    "tags": ["ssh", "telnet", "remote", "terminal"],
+    "systemRequirements": "Windows XP+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "VLC Media Player",
+    "slug": "vlc-media-player",
+    "description": "Free, open-source multimedia player supporting most formats.",
+    "category": "Media",
+    "icon": "https://www.videolan.org/favicon.ico",
+    "homepage": "https://www.videolan.org/",
+    "publisher": "VideoLAN",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "3.0.20",
+    "latestDownloadUrl": "https://download.videolan.org/vlc/3.0.20/win64/vlc-3.0.20-win64.exe",
+    "size": "~40MB",
+    "versions": [
+      {
+        "version": "3.0.20",
+        "downloadUrl": "https://download.videolan.org/vlc/3.0.20/win64/vlc-3.0.20-win64.exe",
+        "releaseDate": "2023-12-13T00:00:00.000Z",
+        "size": "~40MB",
+        "changelog": "New codecs support",
+        "isLatest": true
+      },
+      {
+        "version": "3.0.19",
+        "downloadUrl": "https://download.videolan.org/vlc/3.0.19/win64/vlc-3.0.20-win64.exe",
+        "releaseDate": "2023-08-01T00:00:00.000Z",
+        "size": "~38MB",
+        "changelog": "Stability fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 3456,
+    "rating": 4.9,
+    "tags": ["media", "player", "video", "audio"],
+    "systemRequirements": "Windows XP+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "7-Zip",
+    "slug": "7-zip",
+    "description": "Open-source file archiver with high compression ratio.",
+    "category": "Utilities",
+    "icon": "https://7-zip.org/favicon.ico",
+    "homepage": "https://7-zip.org/",
+    "publisher": "Igor Pavlov",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "23.01",
+    "latestDownloadUrl": "https://7-zip.org/a/7z2301-x64.exe",
+    "size": "~2MB",
+    "versions": [
+      {
+        "version": "23.01",
+        "downloadUrl": "https://7-zip.org/a/7z2301-x64.exe",
+        "releaseDate": "2023-06-20T00:00:00.000Z",
+        "size": "~2MB",
+        "changelog": "New compression algorithms",
+        "isLatest": true
+      },
+      {
+        "version": "22.01",
+        "downloadUrl": "https://7-zip.org/a/7z2201-x64.exe",
+        "releaseDate": "2022-07-20T00:00:00.000Z",
+        "size": "~1.8MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 4678,
+    "rating": 4.9,
+    "tags": ["compression", "archive", "zip", "rar"],
+    "systemRequirements": "Windows XP+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "FFmpeg",
+    "slug": "ffmpeg",
+    "description": "Complete solution for recording, converting, editing multimedia files.",
+    "category": "Tools",
+    "icon": "https://ffmpeg.org/favicon.ico",
+    "homepage": "https://ffmpeg.org/",
+    "publisher": "FFmpeg Project",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "latest",
+    "latestDownloadUrl": "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip",
+    "size": "~200MB",
+    "versions": [
+      {
+        "version": "6.1",
+        "downloadUrl": "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip",
+        "releaseDate": "2023-11-01T00:00:00.000Z",
+        "size": "~200MB",
+        "changelog": "New codecs and improvements",
+        "isLatest": true
+      },
+      {
+        "version": "6.0",
+        "downloadUrl": "https://github.com/BtbN/FFmpeg-Builds/releases/download/v6.0/ffmpeg-n6.0.1-win64-gpl.zip",
+        "releaseDate": "2023-07-01T00:00:00.000Z",
+        "size": "~190MB",
+        "changelog": "Major release",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1234,
+    "rating": 4.6,
+    "tags": ["video", "audio", "conversion", "streaming"],
+    "systemRequirements": "Windows 7+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "IntelliJ IDEA Community",
+    "slug": "intellij-idea-community",
+    "description": "Powerful Java IDE for professional development.",
+    "category": "IDE",
+    "icon": "https://www.jetbrains.com/favicon.ico",
+    "homepage": "https://www.jetbrains.com/idea/",
+    "publisher": "JetBrains",
+    "premium": true,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "2023.2.5",
+    "latestDownloadUrl": "https://download.jetbrains.com/idea/ideaIC-2023.2.5.exe",
+    "size": "~400MB",
+    "versions": [
+      {
+        "version": "2023.2.5",
+        "downloadUrl": "https://download.jetbrains.com/idea/ideaIC-2023.2.5.exe",
+        "releaseDate": "2023-10-24T00:00:00.000Z",
+        "size": "~400MB",
+        "changelog": "New Java 21 support",
+        "isLatest": true
+      },
+      {
+        "version": "2023.1.6",
+        "downloadUrl": "https://download.jetbrains.com/idea/ideaIC-2023.1.6.exe",
+        "releaseDate": "2023-07-11T00:00:00.000Z",
+        "size": "~380MB",
+        "changelog": "Performance improvements",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 987,
+    "rating": 4.8,
+    "tags": ["java", "ide", "jetbrains", "kotlin"],
+    "systemRequirements": "Windows 10+, 8GB RAM, JDK 11+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "OpenJDK 21",
+    "slug": "openjdk-21",
+    "description": "Open-source Java development kit.",
+    "category": "Runtime",
+    "icon": "https://openjdk.java.net/images/openjdk-logo.png",
+    "homepage": "https://openjdk.java.net/",
+    "publisher": "Oracle",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "21.0.1",
+    "latestDownloadUrl": "https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3d405da199ebee514b/35/GPL/openjdk-21_windows-x64_bin.msi",
+    "size": "~200MB",
+    "versions": [
+      {
+        "version": "21.0.1",
+        "downloadUrl": "https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3d405da199ebee514b/35/GPL/openjdk-21_windows-x64_bin.msi",
+        "releaseDate": "2023-10-17T00:00:00.000Z",
+        "size": "~200MB",
+        "changelog": "LTS release",
+        "isLatest": true
+      },
+      {
+        "version": "20.0.2",
+        "downloadUrl": "https://download.java.net/java/GA/jdk20/f28d4b0574aa488098452e3e53d01bf8/13/GPL/openjdk-20_windows-x64_bin.msi",
+        "releaseDate": "2023-07-18T00:00:00.000Z",
+        "size": "~195MB",
+        "changelog": "Previous version",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 2145,
+    "rating": 4.7,
+    "tags": ["java", "jdk", "jvm", "openjdk"],
+    "systemRequirements": "Windows 10+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Sublime Text 4",
+    "slug": "sublime-text-4",
+    "description": "Sophisticated text editor for code, markup, prose with powerful features.",
+    "category": "Editor",
+    "icon": "https://www.sublimetext.com/favicon.ico",
+    "homepage": "https://www.sublimetext.com/",
+    "publisher": "Sublime HQ Pty Ltd",
+    "premium": true,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "Build 4137",
+    "latestDownloadUrl": "https://download.sublimetext.com/Sublime%20Text%20Build%204137%20Setup.exe",
+    "size": "~15MB",
+    "versions": [
+      {
+        "version": "Build 4137",
+        "downloadUrl": "https://download.sublimetext.com/Sublime%20Text%20Build%204137%20Setup.exe",
+        "releaseDate": "2023-05-09T00:00:00.000Z",
+        "size": "~15MB",
+        "changelog": "Performance improvements",
+        "isLatest": true
+      },
+      {
+        "version": "Build 4126",
+        "downloadUrl": "https://download.sublimetext.com/Sublime%20Text%20Build%204126%20Setup.exe",
+        "releaseDate": "2022-08-01T00:00:00.000Z",
+        "size": "~14MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1678,
+    "rating": 4.6,
+    "tags": ["editor", "text", "sublime", "code"],
+    "systemRequirements": "Windows XP+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "WinSCP",
+    "slug": "winscp",
+    "description": "Free SFTP, SCP, FTP client for Windows with advanced features.",
+    "category": "Tools",
+    "icon": "https://winscp.net/favicon.ico",
+    "homepage": "https://winscp.net/",
+    "publisher": "Martin Přikryl",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "6.3.3",
+    "latestDownloadUrl": "https://winscp.net/download/WinSCP-6.3.3-Setup.exe",
+    "size": "~10MB",
+    "versions": [
+      {
+        "version": "6.3.3",
+        "downloadUrl": "https://winscp.net/download/WinSCP-6.3.3-Setup.exe",
+        "releaseDate": "2024-01-16T00:00:00.000Z",
+        "size": "~10MB",
+        "changelog": "Security updates",
+        "isLatest": true
+      },
+      {
+        "version": "6.3.2",
+        "downloadUrl": "https://winscp.net/download/WinSCP-6.3.2-Setup.exe",
+        "releaseDate": "2023-11-01T00:00:00.000Z",
+        "size": "~9.8MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1345,
+    "rating": 4.8,
+    "tags": ["ftp", "sftp", "scp", "file-transfer"],
+    "systemRequirements": "Windows 7+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "OBS Studio",
+    "slug": "obs-studio",
+    "description": "Free open-source software for video recording and live streaming.",
+    "category": "Media",
+    "icon": "https://obsproject.com/favicon.ico",
+    "homepage": "https://obsproject.com/",
+    "publisher": "OBS Project",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "30.0.2",
+    "latestDownloadUrl": "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.0.2-Full-Installer-x64.exe",
+    "size": "~150MB",
+    "versions": [
+      {
+        "version": "30.0.2",
+        "downloadUrl": "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-30.0.2-Full-Installer-x64.exe",
+        "releaseDate": "2023-11-29T00:00:00.000Z",
+        "size": "~150MB",
+        "changelog": "New browser source improvements",
+        "isLatest": true
+      },
+      {
+        "version": "29.1.3",
+        "downloadUrl": "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-29.1.3-Full-Installer-x64.exe",
+        "releaseDate": "2023-07-28T00:00:00.000Z",
+        "size": "~145MB",
+        "changelog": "Stability fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 2789,
+    "rating": 4.7,
+    "tags": ["streaming", "recording", "video", "live"],
+    "systemRequirements": "Windows 10+, OpenGL 3.3+, 4GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Discord",
+    "slug": "discord",
+    "description": "Voice, video, and text communication platform for communities.",
+    "category": "Communication",
+    "icon": "https://discord.com/favicon.ico",
+    "homepage": "https://discord.com/",
+    "publisher": "Discord Inc.",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "0.0.309",
+    "latestDownloadUrl": "https://dl.discordapp.net/apps/win/0.0.309/DiscordSetup.exe",
+    "size": "~100MB",
+    "versions": [
+      {
+        "version": "0.0.309",
+        "downloadUrl": "https://dl.discordapp.net/apps/win/0.0.309/DiscordSetup.exe",
+        "releaseDate": "2024-01-01T00:00:00.000Z",
+        "size": "~100MB",
+        "changelog": "New features and improvements",
+        "isLatest": true
+      },
+      {
+        "version": "0.0.305",
+        "downloadUrl": "https://dl.discordapp.net/apps/win/0.0.305/DiscordSetup.exe",
+        "releaseDate": "2023-12-01T00:00:00.000Z",
+        "size": "~98MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 3987,
+    "rating": 4.5,
+    "tags": ["chat", "voice", "video", "gaming"],
+    "systemRequirements": "Windows 7+, 512MB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "MySQL Server 8.0",
+    "slug": "mysql-server-8-0",
+    "description": "World's most popular open-source relational database.",
+    "category": "Database",
+    "icon": "https://www.mysql.com/favicon.ico",
+    "homepage": "https://www.mysql.com/",
+    "publisher": "Oracle",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "8.0.35",
+    "latestDownloadUrl": "https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.35-winx64.msi",
+    "size": "~500MB",
+    "versions": [
+      {
+        "version": "8.0.35",
+        "downloadUrl": "https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.35-winx64.msi",
+        "releaseDate": "2024-01-16T00:00:00.000Z",
+        "size": "~500MB",
+        "changelog": "Security and performance improvements",
+        "isLatest": true
+      },
+      {
+        "version": "8.0.34",
+        "downloadUrl": "https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.34-winx64.msi",
+        "releaseDate": "2023-11-15T00:00:00.000Z",
+        "size": "~495MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1456,
+    "rating": 4.6,
+    "tags": ["mysql", "sql", "database", "relational"],
+    "systemRequirements": "Windows 10+, 4GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "PostgreSQL 16",
+    "slug": "postgresql-16",
+    "description": "Advanced open-source object-relational database system.",
+    "category": "Database",
+    "icon": "https://www.postgresql.org/favicon.ico",
+    "homepage": "https://www.postgresql.org/",
+    "publisher": "PostgreSQL Global Development Group",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "16.0",
+    "latestDownloadUrl": "https://get.enterprisedb.com/postgresql/postgresql-16.0-1-windows-x64.exe",
+    "size": "~300MB",
+    "versions": [
+      {
+        "version": "16.0-1",
+        "downloadUrl": "https://get.enterprisedb.com/postgresql/postgresql-16.0-1-windows-x64.exe",
+        "releaseDate": "2023-09-14T00:00:00.000Z",
+        "size": "~300MB",
+        "changelog": "Major version release",
+        "isLatest": true
+      },
+      {
+        "version": "15.5-1",
+        "downloadUrl": "https://get.enterprisedb.com/postgresql/postgresql-15.5-1-windows-x64.exe",
+        "releaseDate": "2023-08-10T00:00:00.000Z",
+        "size": "~290MB",
+        "changelog": "Previous stable",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1234,
+    "rating": 4.8,
+    "tags": ["postgresql", "postgres", "sql", "database"],
+    "systemRequirements": "Windows 10+, 4GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Redis for Windows",
+    "slug": "redis-for-windows",
+    "description": "In-memory data store used as database, cache, message broker.",
+    "category": "Database",
+    "icon": "https://redis.io/favicon.ico",
+    "homepage": "https://redis.io/",
+    "publisher": "Microsoft Archive",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "3.0.504",
+    "latestDownloadUrl": "https://github.com/microsoftarchive/redis/releases/download/win-3.0.504/Redis-x64-3.0.504.zip",
+    "size": "~10MB",
+    "versions": [
+      {
+        "version": "3.0.504",
+        "downloadUrl": "https://github.com/microsoftarchive/redis/releases/download/win-3.0.504/Redis-x64-3.0.504.zip",
+        "releaseDate": "2018-05-01T00:00:00.000Z",
+        "size": "~10MB",
+        "changelog": "Windows port",
+        "isLatest": true
+      },
+      {
+        "version": "3.0.500",
+        "downloadUrl": "https://github.com/microsoftarchive/redis/releases/download/win-3.0.500/Redis-x64-3.0.500.zip",
+        "releaseDate": "2016-10-01T00:00:00.000Z",
+        "size": "~9MB",
+        "changelog": "Older version",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 987,
+    "rating": 4.4,
+    "tags": ["redis", "cache", "database", "in-memory"],
+    "systemRequirements": "Windows 7+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Nginx",
+    "slug": "nginx",
+    "description": "High-performance web server and reverse proxy server.",
+    "category": "Server",
+    "icon": "http://nginx.org/nginx.png",
+    "homepage": "http://nginx.org/",
+    "publisher": "NGINX Inc.",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "1.25.3",
+    "latestDownloadUrl": "http://nginx.org/download/nginx-1.25.3.zip",
+    "size": "~5MB",
+    "versions": [
+      {
+        "version": "1.25.3",
+        "downloadUrl": "http://nginx.org/download/nginx-1.25.3.zip",
+        "releaseDate": "2023-10-24T00:00:00.000Z",
+        "size": "~5MB",
+        "changelog": "Security and stability fixes",
+        "isLatest": true
+      },
+      {
+        "version": "1.24.0",
+        "downloadUrl": "http://nginx.org/download/nginx-1.24.0.zip",
+        "releaseDate": "2023-05-02T00:00:00.000Z",
+        "size": "~4.8MB",
+        "changelog": "Mainline branch",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 765,
+    "rating": 4.7,
+    "tags": ["webserver", "proxy", "http", "nginx"],
+    "systemRequirements": "Windows 7+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": ".NET 8 SDK",
+    "slug": "dotnet-8-sdk",
+    "description": "Development kit for building .NET applications.",
+    "category": "Runtime",
+    "icon": "https://dotnet.microsoft.com/favicon.ico",
+    "homepage": "https://dotnet.microsoft.com/",
+    "publisher": "Microsoft",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "8.0.100",
+    "latestDownloadUrl": "https://dotnet.microsoft.com/download/dotnet/8.0",
+    "size": "~200MB",
+    "versions": [
+      {
+        "version": "8.0.100",
+        "downloadUrl": "https://dotnet.microsoft.com/download/dotnet/8.0",
+        "releaseDate": "2023-11-14T00:00:00.000Z",
+        "size": "~200MB",
+        "changelog": "LTS release",
+        "isLatest": true
+      },
+      {
+        "version": "7.0.400",
+        "downloadUrl": "https://dotnet.microsoft.com/download/dotnet/7.0",
+        "releaseDate": "2023-11-07T00:00:00.000Z",
+        "size": "~195MB",
+        "changelog": "Previous LTS",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 2100,
+    "rating": 4.8,
+    "tags": ["dotnet", "net", "csharp", "sdk"],
+    "systemRequirements": "Windows 10+, 4GB RAM",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "PowerShell 7",
+    "slug": "powershell-7",
+    "description": "Cross-platform task automation and configuration management framework.",
+    "category": "Tools",
+    "icon": "https://learn.microsoft.com/en-us/powershell/images/logo.png",
+    "homepage": "https://learn.microsoft.com/powershell/",
+    "publisher": "Microsoft",
+    "premium": false,
+    "featured": false,
+    "enabled": true,
+    "currentVersion": "7.4.1",
+    "latestDownloadUrl": "https://github.com/PowerShell/PowerShell/releases/download/v7.4.1/powershell-7.4.1-win-x64.msi",
+    "size": "~100MB",
+    "versions": [
+      {
+        "version": "7.4.1",
+        "downloadUrl": "https://github.com/PowerShell/PowerShell/releases/download/v7.4.1/powershell-7.4.1-win-x64.msi",
+        "releaseDate": "2023-11-07T00:00:00.000Z",
+        "size": "~100MB",
+        "changelog": "New features and fixes",
+        "isLatest": true
+      },
+      {
+        "version": "7.3.9",
+        "downloadUrl": "https://github.com/PowerShell/PowerShell/releases/download/v7.3.9/powershell-7.3.9-win-x64.msi",
+        "releaseDate": "2023-10-10T00:00:00.000Z",
+        "size": "~98MB",
+        "changelog": "Security updates",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 1876,
+    "rating": 4.7,
+    "tags": ["powershell", "scripting", "automation", "cli"],
+    "systemRequirements": "Windows 7+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  },
+  {
+    "name": "Notepad++",
+    "slug": "notepad-plus-plus",
+    "description": "Free source code editor and Notepad replacement with syntax highlighting.",
+    "category": "Editor",
+    "icon": "https://notepad-plus-plus.org/favicon.ico",
+    "homepage": "https://notepad-plus-plus.org/",
+    "publisher": "Don Ho",
+    "premium": false,
+    "featured": true,
+    "enabled": true,
+    "currentVersion": "8.6.5",
+    "latestDownloadUrl": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.Installer.x64.exe",
+    "size": "~5MB",
+    "versions": [
+      {
+        "version": "8.6.5",
+        "downloadUrl": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.5/npp.8.6.5.Installer.x64.exe",
+        "releaseDate": "2024-01-08T00:00:00.000Z",
+        "size": "~5MB",
+        "changelog": "AI improvements",
+        "isLatest": true
+      },
+      {
+        "version": "8.6.2",
+        "downloadUrl": "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.2/npp.8.6.2.Installer.x64.exe",
+        "releaseDate": "2023-11-21T00:00:00.000Z",
+        "size": "~4.8MB",
+        "changelog": "Bug fixes",
+        "isLatest": false
+      }
+    ],
+    "downloadCount": 4321,
+    "rating": 4.9,
+    "tags": ["editor", "notepad", "syntax", "code"],
+    "systemRequirements": "Windows 7+",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-20T15:30:00.000Z"
+  }
+]
