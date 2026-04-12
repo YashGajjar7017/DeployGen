@@ -3,7 +3,7 @@
  * Implements smart HTTP caching and compression for faster responses
  */
 
-const NodeCache = require('node-cache');
+import NodeCache from 'node-cache';
 
 // Initialize cache with 5 minute TTL
 const responseCache = new NodeCache({ stdTTL: 300, checkperiod: 60 });
@@ -136,7 +136,7 @@ const getCacheStats = () => {
   return stats;
 };
 
-module.exports = {
+export {
   cacheMiddleware,
   clearCachePattern,
   clearAllCache,
