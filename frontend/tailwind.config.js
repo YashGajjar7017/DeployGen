@@ -48,7 +48,7 @@ module.exports = {
           '0%': { backgroundPosition: '-1000px 0' },
           '100%': { backgroundPosition: '1000px 0' },
         },
-        pulse-glow: {
+        'pulse-glow': {
           '0%, 100%': { opacity: '0.5', boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
           '50%': { opacity: '1', boxShadow: '0 0 30px rgba(59, 130, 246, 0.8)' },
         },
@@ -66,15 +66,6 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/backdrop-filter', {
-      '@supports (backdrop-filter: blur(0))': {
-        '@layer utilities': {
-          '.backdrop-blur': { backdropFilter: 'blur(10px)' },
-          '.backdrop-blur-md': { backdropFilter: 'blur(12px)' },
-          '.backdrop-blur-lg': { backdropFilter: 'blur(16px)' },
-        },
-      },
-    }),
-  ],
+  plugins: [],
 };
+

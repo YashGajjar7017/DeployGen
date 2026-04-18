@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, Zap, RefreshCw } from 'lucide-react';
 import AppSelectionGrid from '@/app/components/AppSelectionGrid';
 import TokenDisplay from '@/app/components/TokenDisplay';
+import { GlassCard, GlassButton, GlassInput } from '@/app/components/GlassComponents';
 import useAppStore from '@/app/lib/appStore';
 import { appsAPI, configAPI } from '@/app/lib/api';
 import toast from 'react-hot-toast';
@@ -17,6 +18,29 @@ export default function DashboardPage() {
   const [config, setConfig] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCat, setSelectedCat] = useState(null);
+  const containerRef = useRef(null);
+  const circlesRef = useRef([]);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // Cursor tracking circles effect
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+      
+      circlesRef.current.forEach((circle, index) => {
+        if (circle) {
+          const delay = index * 0.03;
+          setTimeout(() => {
+            circle.style.left = `${e.clientX}px`;
+            circle.style.top = `${e.clientY}px`;
+          }, delay * 50);
+        }
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   // Fetch apps on mount
   useEffect(() => {
@@ -80,104 +104,182 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin text-blue-600">
-          <Zap size={32} />
-        </div>
+      <div className="flex items-center justify-center min-h-screen" ref={containerRef}>
+        {/* Cursor-Tracking Circles */}
+        {[...Array(4)].map((_, i) => (
+          <div
+            key={`loading-${i}`}
+            ref={(el) => (circlesRef.current[i] = el)}
+            className={`fixed pointer-events-none rounded-full mix-blend-screen`}
+            style={{
+              width: `${60 - i * 12}px`,
+              height: `${60 - i * 12}px`,
+              background: `rgba(${59 + i * 20}, 130 - i * 20}, 246, ${0.2 - i * 0.03})`,
+              filter: `blur(${12 + i * 8}px)`,
+              zIndex: -1,
+              transition: 'all 0.2s ease-out',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        ))}
+        
+        <GlassCard className="p-12 text-center">
+          <Zap size={48} className="text-blue-400 mx-auto mb-4 animate-pulse-glow" />
+          <p className="text-xl text-slate-900 dark:text-white font-semibold">Loading dashboard...</p>
+        </GlassCard>
       </div>
     );
   }
 
   if (config) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <button
-          onClick={() => setConfig(null)}
-          className="mb-6 px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 flex items-center gap-2"
-        >
-          <RefreshCw size={18} />
-          Create Another Setup
-        </button>
-        <TokenDisplay config={config} />
-      </div>
+      <main className="min-h-screen overflow-hidden" ref={containerRef}>
+        {/* Animated Background Circles */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 -right-32 w-80 h-80 bg-blue-400/30 rounded-full blur-3xl animate-float-1" />
+          <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl animate-float-2" style={{ animationDelay: '2s' }} />
+          <div className="absolute top-1/2 left-1/4 w-72 h-72 bg-purple-400/15 rounded-full blur-3xl animate-float-3" style={{ animationDelay: '4s' }} />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+          <GlassButton variant="secondary" onClick={() => setConfig(null)} className="mb-6 flex items-center gap-2">
+            <RefreshCw size={18} />
+            Create Another Setup
+          </GlassButton>
+          <TokenDisplay config={config} />
+        </div>
+      </main>
     );
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header */}
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-2">
-          Create Your Setup
-        </h1>
-        <p className="text-slate-600 dark:text-slate-300">
-          Select the applications you want to install, then generate a secure token
-        </p>
+    <main className="min-h-screen overflow-hidden" ref={containerRef}>
+      {/* Cursor-Tracking Circles */}
+      {[...Array(5)].map((_, i) => (
+        <div
+          key={i}
+          ref={(el) => (circlesRef.current[i] = el)}
+          className={`fixed pointer-events-none rounded-full mix-blend-screen`}
+          style={{
+            width: `${80 - i * 15}px`,
+            height: `${80 - i * 15}px`,
+            background: `rgba(${59 + i * 20}, 130 - i * 20}, 246, ${0.2 - i * 0.03})`,
+            filter: `blur(${15 + i * 10}px)`,
+            zIndex: -1,
+            transition: 'all 0.3s ease-out',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      ))}
+
+      {/* Animated Background Circles */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 -right-32 w-80 h-80 bg-blue-400/30 rounded-full blur-3xl animate-float-1 animate-pulse-slow" />
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl animate-float-2" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/4 w-72 h-72 bg-purple-400/15 rounded-full blur-3xl animate-float-3" style={{ animationDelay: '4s' }} />
+        <div className="absolute -top-40 right-1/3 w-64 h-64 bg-pink-400/10 rounded-full blur-3xl animate-float-4" style={{ animationDelay: '6s' }} />
       </div>
 
-      {/* Search and Filter */}
-      <div className="mb-8 space-y-4">
-        {/* Search */}
-        <div className="flex items-center gap-2">
-          <Search size={20} className="text-slate-400" />
-          <input
-            type="text"
-            placeholder="Search applications..."
-            value={searchTerm}
-            onChange={(e) => handleSearch(e.target.value)}
-            className="flex-1 px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
-          />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+        {/* Header */}
+        <div className="mb-12 space-y-4 animate-slideInDown">
+          <h1 className="text-5xl md:text-6xl font-black">
+            <span className="gradient-text gradient-animated">Create Your Setup</span>
+          </h1>
+          <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl">
+            Select your favorite applications, then generate a secure token for instant installation
+          </p>
         </div>
 
-        {/* Categories */}
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => handleCategoryFilter(category)}
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                selectedCat === category
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white hover:bg-slate-300 dark:hover:bg-slate-600'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-          {selectedCat && (
-            <button
-              onClick={() => {
+        {/* Search and Filter - Glassmorphic */}
+        <div className="mb-8 space-y-4 animate-slideInUp">
+          {/* Search */}
+          <GlassCard className="p-4 flex items-center gap-4" variant="light">
+            <Search size={22} className="text-blue-400 flex-shrink-0" />
+            <input
+              type="text"
+              placeholder="Search applications by name..."
+              value={searchTerm}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="flex-1 bg-transparent outline-none text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 text-lg"
+            />
+            {searchTerm && (
+              <button
+                onClick={() => handleSearch('')}
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+              >
+                ✕
+              </button>
+            )}
+          </GlassCard>
+
+          {/* Categories */}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryFilter(category)}
+                className={`px-4 py-2 rounded-xl font-medium transition-all backdrop-blur-md border ${
+                  selectedCat === category
+                    ? 'bg-blue-500/70 text-white border-blue-400/60 shadow-glass'
+                    : 'bg-white/20 dark:bg-slate-900/20 text-slate-900 dark:text-white border-white/30 dark:border-white/10 hover:bg-white/30'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+            {selectedCat && (
+              <GlassButton variant="danger" size="sm" onClick={() => {
                 setSelectedCat(null);
                 filterApps(null, searchTerm);
-              }}
-              className="px-4 py-2 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded-lg font-medium hover:bg-red-200 dark:hover:bg-red-800"
-            >
-              Clear Filter
-            </button>
-          )}
+              }}>
+                Clear Filter
+              </GlassButton>
+            )}
+          </div>
+        </div>
+
+        {/* App Selection Counter */}
+        <div className="mb-6 animate-slideInUp" style={{ animationDelay: '0.1s' }}>
+          <GlassCard className="p-6 flex items-center justify-between" variant="primary">
+            <div>
+              <p className="text-slate-600 dark:text-slate-300 text-sm mb-2">Selected Applications</p>
+              <p className="text-4xl font-black gradient-text">{selectedApps.length}</p>
+            </div>
+            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center text-white">
+              <span className="text-3xl font-bold">{Math.min(selectedApps.length, 99)}</span>
+            </div>
+          </GlassCard>
+        </div>
+
+        {/* Apps Grid */}
+        <div className="mb-12 animate-slideInUp" style={{ animationDelay: '0.2s' }}>
+          <AppSelectionGrid />
+        </div>
+
+        {/* Generate Button */}
+        <div className="flex gap-4 justify-center animate-slideInUp" style={{ animationDelay: '0.3s' }}>
+          <GlassButton
+            variant="primary"
+            size="lg"
+            onClick={handleGenerateConfig}
+            disabled={selectedApps.length === 0 || generating}
+            className="disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          >
+            {generating ? (
+              <>
+                <Zap size={20} className="animate-spin" />
+                Generating...
+              </>
+            ) : (
+              <>
+                <Zap size={20} />
+                Generate Setup Token
+              </>
+            )}
+          </GlassButton>
         </div>
       </div>
-
-      {/* App Selection Counter */}
-      <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900 rounded-lg">
-        <p className="text-slate-900 dark:text-white font-semibold">
-          Selected: <span className="text-blue-600 dark:text-blue-300">{selectedApps.length}</span> app(s)
-        </p>
-      </div>
-
-      {/* Apps Grid */}
-      <AppSelectionGrid />
-
-      {/* Generate Button */}
-      <div className="mt-12 flex gap-4 justify-center">
-        <button
-          onClick={handleGenerateConfig}
-          disabled={selectedApps.length === 0 || generating}
-          className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-slate-400 font-semibold flex items-center gap-2"
-        >
-          {generating ? 'Generating...' : '⚡ Generate Setup'}
-        </button>
-      </div>
-    </div>
+    </main>
   );
 }

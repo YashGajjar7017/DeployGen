@@ -1,6 +1,22 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api' || process.env.NEXT_PUBLIC_API_URL;
+// Dynamically determine API URL based on environment
+const getAPIUrl = () => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  
+  // In browser, use the current host but port 8000
+  if (typeof window !== 'undefined') {
+    const hostname = window.location.hostname;
+    return `http://${hostname}:8000/api`;
+  }
+  
+  // Server-side fallback
+  return 'http://localhost:8000/api';
+};
+
+const API_URL = getAPIUrl();
 
 // Create axios instance
 const apiClient = axios.create({

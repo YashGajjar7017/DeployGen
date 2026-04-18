@@ -26,7 +26,7 @@ import {
   Trash2,
   Edit2,
   Save,
-  Cancel,
+  X as Cancel,
   
   // Status
   Search,

@@ -38,12 +38,15 @@ app.use(cors({
       'http://localhost:3000',
       'http://localhost:3001',
       'http://192.168.1.9:3000',
+      'http://192.168.56.1:3000',
+      'http://192.168.56.1:3001',
       process.env.FRONTEND_URL
     ].filter(Boolean);
     
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.warn(`CORS request blocked from origin: ${origin}`);
       callback(new Error('CORS not allowed'));
     }
   },
